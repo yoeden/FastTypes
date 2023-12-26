@@ -11,7 +11,7 @@
     <Authors>YoEden</Authors>
     <Description>FastTypes is a fast fluent reflection library for .NET !</Description>
     <Copyright>Copyright YoEden</Copyright>
-    <PackageReadmeFile>..\README.md</PackageReadmeFile>
+    <PackageReadmeFile>..\..\README.md</PackageReadmeFile>
     <Features>strict</Features>
     <SignAssembly>true</SignAssembly>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

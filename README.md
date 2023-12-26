@@ -2,10 +2,10 @@
 # FastTypes 💨
 
 [![Coverage](https://img.shields.io/badge/build-100%25-brightgreen?label=Coverage)]()
-[![Nuget](https://img.shields.io/nuget/v/Riok.Mapperly?style=flat-square)](https://www.nuget.org/packages/Riok.Mapperly/)
-[![License](https://img.shields.io/github/license/riok/mapperly?style=flat-square)](https://github.com/riok/mapperly/blob/main/LICENSE)
-[![Downloads](https://img.shields.io/nuget/dt/riok.mapperly?style=flat-square)](https://www.nuget.org/packages/Riok.Mapperly/)
-[![GitHub](https://img.shields.io/badge/-source-181717.svg?logo=GitHub)](https://github.com/riok/mapperly)
+[![Nuget](https://img.shields.io/nuget/v/FastTypes?style=flat-square)](https://www.nuget.org/packages/FastTypes/)
+[![License](https://img.shields.io/github/license/yoeden/fasttypes?style=flat-square)](https://github.com/yoeden/fasttypes/blob/master/LICENSE.md)
+[![Downloads](https://img.shields.io/nuget/dt/fasttypes?style=flat-square)](https://www.nuget.org/packages/FastTypes/)
+[![GitHub](https://img.shields.io/badge/-source-181717.svg?logo=GitHub)](https://github.com/yoeden/fasttypes)
 
 FastTypes is a fast fluent reflection library for .NET !
 
