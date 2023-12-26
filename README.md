@@ -1,0 +1,62 @@
+﻿
+# FastTypes 💨
+
+[![Coverage](https://img.shields.io/badge/build-100%25-brightgreen?label=Coverage)]()
+[![Nuget](https://img.shields.io/nuget/v/Riok.Mapperly?style=flat-square)](https://www.nuget.org/packages/Riok.Mapperly/)
+[![License](https://img.shields.io/github/license/riok/mapperly?style=flat-square)](https://github.com/riok/mapperly/blob/main/LICENSE)
+[![Downloads](https://img.shields.io/nuget/dt/riok.mapperly?style=flat-square)](https://www.nuget.org/packages/Riok.Mapperly/)
+[![GitHub](https://img.shields.io/badge/-source-181717.svg?logo=GitHub)](https://github.com/riok/mapperly)
+
+FastTypes is a fast fluent reflection library for .NET !
+
+## Documentation 📚
+
+Documentation available at the link [here](https://linktodocumentation) (WIP)
+
+
+## Quickstart 🏃
+
+```csharp
+// Create a fast type
+var type = FastType.Of<Student>();
+
+// Create a new student
+var student = type.New("Micheal Joradn", 23);
+
+// Get value from a property
+var age = type.Property("Age").Get<int>();
+
+// Set property value
+type.Property("Name").Set(student, "Scottie Pippen");
+
+// Call a method
+type.Method("MarkAsPassed").Invoke(student, gpaScore);
+```
+## Benchmarks ⏱️
+
+#### New Struct
+| Method           | Mean        | Allocated |
+|----------------- |------------:|----------:|
+| New              |   0.0036 ns |         - |
+| FastTypeCreate   |   1.9761 ns |         - |
+| ActivatorGeneric | 128.8025 ns |      24 B |
+| ActivatorType    | 156.3947 ns |      24 B |
+| CtorInfo         |  51.3921 ns |      24 B |
+
+#### Get property value
+
+| Method        | Mean       | Allocated |
+|-------------- |-----------:|----------:|
+| Direct        |  0.0050 ns |         - |
+| FastProps     |  3.9568 ns |         - |
+| PropertyInfo  | 55.5628 ns |      24 B |
+
+## Roadmap 🚧
+
+- Add query abilities (query types, properties and methods that return a certian type, inherit a certian, etc...)
+- Add deep and shallow clone ability
+- Optimize further 
+
+## License 🖊️
+
+[Apache-2.0](https://choosealicense.com/licenses/apache-2.0/)
