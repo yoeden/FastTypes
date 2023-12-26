@@ -38,7 +38,7 @@ type.Method("MarkAsPassed").Invoke(student, gpaScore);
 | Method           | Mean        | Allocated |
 |----------------- |------------:|----------:|
 | New              |   0.0036 ns |         - |
-| FastTypeCreate   |   1.9761 ns |         - |
+| FastTypes        |   1.9761 ns |         - |
 | ActivatorGeneric | 128.8025 ns |      24 B |
 | ActivatorType    | 156.3947 ns |      24 B |
 | CtorInfo         |  51.3921 ns |      24 B |
@@ -48,7 +48,7 @@ type.Method("MarkAsPassed").Invoke(student, gpaScore);
 | Method        | Mean       | Allocated |
 |-------------- |-----------:|----------:|
 | Direct        |  0.0050 ns |         - |
-| FastProps     |  3.9568 ns |         - |
+| FastTypes     |  3.9568 ns |         - |
 | PropertyInfo  | 55.5628 ns |      24 B |
 
 ## Roadmap 🚧
