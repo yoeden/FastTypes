@@ -11,7 +11,7 @@ FastTypes is a fast fluent reflection library for .NET !
 
 ## Documentation 📚
 
-Documentation available at the link [here](https://linktodocumentation) (WIP)
+Documentation available at the link [here](/docs/README.md)
 
 
 ## Quickstart 🏃
