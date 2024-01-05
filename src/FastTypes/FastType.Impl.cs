@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using FastTypes.DataStructures;
-using FastTypes.Features.Reflection.Activator;
-using FastTypes.Features.Reflection.Methods;
-using FastTypes.Features.Reflection.Properties;
+using FastTypes.Reflection;
 
 namespace FastTypes
 {

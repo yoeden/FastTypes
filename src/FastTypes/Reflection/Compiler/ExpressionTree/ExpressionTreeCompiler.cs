@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 
-namespace FastTypes.Features.Reflection.Compiler.ExpressionTree
+namespace FastTypes.Reflection
 {
     public sealed class ExpressionTreeCompiler : IReflectionCompiler
     {

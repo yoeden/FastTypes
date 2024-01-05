@@ -4,9 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using FastTypes.DataStructures;
-using FastTypes.Features.Reflection.Compiler;
 
-namespace FastTypes.Features.Reflection.Activator
+namespace FastTypes.Reflection
 {
     public sealed class FastActivator<TType> : FastActivator
     {
