@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FastTypes.Features.Reflection.Methods
+namespace FastTypes.Reflection
 {
     public abstract class FastMethod : FastMember
     {

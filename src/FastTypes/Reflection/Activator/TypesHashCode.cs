@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FastTypes.Features.Reflection.Activator
+namespace FastTypes.Reflection
 {
     internal static class TypesHashCode
     {

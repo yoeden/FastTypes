@@ -1,5 +1,5 @@
 ﻿
-# FastTypes 💨
+# <img src="docs/art/logo.svg" alt="SVG" style="width: 64px; height: 64px; margin-bottom: -16px;"> Fast Types
 
 [![Coverage](https://img.shields.io/badge/build-100%25-brightgreen?label=Coverage)]()
 [![Nuget](https://img.shields.io/nuget/v/FastTypes?style=flat-square)](https://www.nuget.org/packages/FastTypes/)
@@ -11,7 +11,7 @@ FastTypes is a fast fluent reflection library for .NET !
 
 ## Documentation 📚
 
-Documentation available at the link [here](https://linktodocumentation) (WIP)
+Documentation available at the link [here](/docs/README.md)
 
 
 ## Quickstart 🏃
@@ -35,8 +35,8 @@ type.Method("MarkAsPassed").Invoke(student, gpaScore);
 ## Benchmarks ⏱️
 
 #### New Struct
-| Method           | Mean        | Allocated |
-|----------------- |------------:|----------:|
+| Method           |        Mean | Allocated |
+| ---------------- | ----------: | --------: |
 | New              |   0.0036 ns |         - |
 | FastTypes        |   1.9761 ns |         - |
 | ActivatorGeneric | 128.8025 ns |      24 B |
@@ -45,11 +45,11 @@ type.Method("MarkAsPassed").Invoke(student, gpaScore);
 
 #### Get property value
 
-| Method        | Mean       | Allocated |
-|-------------- |-----------:|----------:|
-| Direct        |  0.0050 ns |         - |
-| FastTypes     |  3.9568 ns |         - |
-| PropertyInfo  | 55.5628 ns |      24 B |
+| Method       |       Mean | Allocated |
+| ------------ | ---------: | --------: |
+| Direct       |  0.0050 ns |         - |
+| FastTypes    |  3.9568 ns |         - |
+| PropertyInfo | 55.5628 ns |      24 B |
 
 ## Roadmap 🚧
 

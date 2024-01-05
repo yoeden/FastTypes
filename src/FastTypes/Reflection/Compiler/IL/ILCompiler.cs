@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace FastTypes.Features.Reflection.Compiler.IL
+namespace FastTypes.Reflection
 {
     internal sealed class ILCompiler : IReflectionCompiler
     {

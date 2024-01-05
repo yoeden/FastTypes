@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Reflection;
-using FastTypes.Features.Reflection.Compiler;
 
-namespace FastTypes.Features.Reflection.Properties
+namespace FastTypes.Reflection
 {
     public partial class FastProperty<TType>
     {

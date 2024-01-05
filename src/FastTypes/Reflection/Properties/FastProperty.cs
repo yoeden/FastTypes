@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace FastTypes.Features.Reflection.Properties
+namespace FastTypes.Reflection
 {
     public abstract class FastProperty : FastMember
     {

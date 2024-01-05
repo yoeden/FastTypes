@@ -1,4 +1,4 @@
-﻿namespace FastTypes.Features.Reflection.Activator
+﻿namespace FastTypes.Reflection
 {
     public abstract class FastActivator
     {
