@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace FastTypes.Features.Reflection.Methods
+namespace FastTypes.Reflection
 {
     public sealed partial class FastMethod<TType> : FastMethod
     {

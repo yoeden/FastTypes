@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-using FastTypes.Features.Reflection.Compiler;
 
-namespace FastTypes.Features.Reflection.Methods
+namespace FastTypes.Reflection
 {
     public partial class FastMethod<TType>
     {

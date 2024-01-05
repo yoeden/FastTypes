@@ -1,9 +1,7 @@
-﻿using FastTypes.Features.Reflection.Properties;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using FastTypes.Features.Reflection.Activator;
-using FastTypes.Features.Reflection.Methods;
+using FastTypes.Reflection;
 
 namespace FastTypes
 {

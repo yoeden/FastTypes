@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace FastTypes.Features.Reflection
+namespace FastTypes.Reflection
 {
     public abstract class FastMember
     {

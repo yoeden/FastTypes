@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace FastTypes.Features.Reflection.Compiler
+namespace FastTypes.Reflection
 {
     internal interface IReflectionCompiler
     {

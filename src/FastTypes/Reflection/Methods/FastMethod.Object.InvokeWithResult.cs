@@ -1,4 +1,4 @@
-﻿namespace FastTypes.Features.Reflection.Methods
+﻿namespace FastTypes.Reflection
 {
 	public partial class FastMethod<TType>
 	{

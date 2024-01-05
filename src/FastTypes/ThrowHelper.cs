@@ -1,5 +1,5 @@
 ﻿using System;
-using FastTypes.Features.Reflection.Properties;
+using FastTypes.Reflection;
 
 namespace FastTypes
 {
