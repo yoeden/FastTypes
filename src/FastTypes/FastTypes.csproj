@@ -11,6 +11,9 @@
     <Authors>YoEden</Authors>
     <Description>FastTypes is a fast fluent reflection library for .NET !</Description>
     <Copyright>Copyright YoEden</Copyright>
+    <PackageId>NuGet.Workflow</PackageId>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/yoeden/FastTypes</RepositoryUrl>
     <Features>strict</Features>
     <SignAssembly>true</SignAssembly>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
