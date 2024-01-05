@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using FastTypes.Features.Query;
+using FastTypes.Query;
 using FluentAssertions;
 
 namespace FastTypes.Tests.Query.Builder

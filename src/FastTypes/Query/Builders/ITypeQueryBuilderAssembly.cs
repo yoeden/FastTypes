@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace FastTypes.Features.Query
+namespace FastTypes.Query
 {
     public interface ITypeQueryBuilderAssembly
     {

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace FastTypes.Features.Query
+﻿namespace FastTypes.Query
 {
     //TODO:
     //public static class TypeQueryActivatorExt

@@ -5,10 +5,10 @@ using System.Reflection.Emit;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using FastTypes.Features.Query;
 using System.Reflection.PortableExecutable;
 using System.Runtime.Loader;
 using System.Xml.Linq;
+using FastTypes.Query;
 using FluentAssertions;
 
 namespace FastTypes.Tests.Query.Scanner

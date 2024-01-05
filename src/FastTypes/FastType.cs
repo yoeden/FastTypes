@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FastTypes.Query;
 using FastTypes.Reflection;
 
 namespace FastTypes

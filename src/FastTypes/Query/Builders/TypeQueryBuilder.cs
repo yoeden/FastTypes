@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace FastTypes.Features.Query
+namespace FastTypes.Query
 {
     internal sealed partial class TypeQueryBuilder : ITypeQueryBuilderAssembly, ITypeQueryBuilderTypes, ITypeQueryBuilderModifiers
     {

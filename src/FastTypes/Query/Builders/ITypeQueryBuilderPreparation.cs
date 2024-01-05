@@ -1,4 +1,4 @@
-﻿namespace FastTypes.Features.Query
+﻿namespace FastTypes.Query
 {
     public interface ITypeQueryBuilderPreparation
     {

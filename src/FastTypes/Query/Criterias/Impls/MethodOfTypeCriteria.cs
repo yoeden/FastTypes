@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FastTypes.Features.Query
+namespace FastTypes.Query
 {
     public sealed class MethodOfTypeCriteria : ITypeQueryCriteria
     {

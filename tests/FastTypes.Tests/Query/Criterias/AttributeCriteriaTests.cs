@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using FastTypes.Features.Query;
+using FastTypes.Query;
 using FluentAssertions;
 
 namespace FastTypes.Tests.Query.Criterias

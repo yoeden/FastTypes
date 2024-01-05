@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using FastTypes.Features.Query;
+using FastTypes.Query;
 using FluentAssertions;
 
 namespace FastTypes.Tests.Query.Builder

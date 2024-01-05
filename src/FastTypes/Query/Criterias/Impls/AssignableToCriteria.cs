@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FastTypes.Features.Query
+namespace FastTypes.Query
 {
     public sealed class AssignableToCriteria : ITypeQueryCriteria
     {
@@ -44,7 +44,7 @@ namespace FastTypes.Features.Query
             var interfaceTypes = t.GetInterfaces();
             foreach (var it in interfaceTypes)
             {
-                if (it.IsGenericType && it.GetGenericTypeDefinition() == _target) 
+                if (it.IsGenericType && it.GetGenericTypeDefinition() == _target)
                     return true;
             }
 
