@@ -2,90 +2,118 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using FastTypes.DataStructures;
 
 namespace FastTypes.Query
 {
     public static class TypeQueryScanner
     {
+        private static readonly ConcurrentDictionary<string, Type[]> TypeCache = new();
+
+        private static readonly ParallelOptions ParallelRunOptions =
+            new()
+            {
+                MaxDegreeOfParallelism = Environment.ProcessorCount / 2
+            };
+
         //TODO: Create an IReadOnlyList array proxy class and use List from object pool
         public static IReadOnlyList<IReadOnlyList<Type>> ScanForGroupedTypes(TypeQuerySnapshot snapshot)
         {
-            var result = new List<ConcurrentBag<Type>>();
+            var result = new List<LockableList<Type>>();
             var groups = snapshot.Groups;
             var assemblies = snapshot.Assemblies;
 
             for (var i = 0; i < groups.Count; i++)
             {
-                result.Add(new ConcurrentBag<Type>());
+                result.Add(new LockableList<Type>());
             }
 
-            Parallel.ForEach(assemblies, new ParallelOptions()
+            if (snapshot.Assemblies.Count == 1)
             {
-                MaxDegreeOfParallelism = Environment.ProcessorCount / 2
-            }, assembly =>
+                var types = GetAssemblyTypes(assemblies[0]);
+
+                for (var i = 0; i < groups.Count; i++)
+                {
+                    var group = groups[i];
+                    FillListWithMatchingTypes(types, group, result[i]);
+                }
+            }
+
+            Parallel.ForEach(assemblies, ParallelRunOptions, assembly =>
             {
-                var types = assembly.GetTypes();
+                var types = GetAssemblyTypes(assembly);
                 var t = new List<Type>();
 
                 for (var i = 0; i < groups.Count; i++)
                 {
                     var group = groups[i];
-                    foreach (Type type in types)
-                    {
-                        if (IsTypeMatchingCriterias(group.Criterias, type)) t.Add(type);
-                    }
+                    FillListWithMatchingTypes(types, group, t);
 
-                    if (t.Count != 0)
-                    {
-                        for (var i1 = 0; i1 < t.Count; i1++)
-                        {
-                            result[i].Add(t[i1]);
-                        }
-                    }
+                    result[i].AddRange(t);
                     t.Clear();
                 }
             });
 
-            return result.Select(bag => new List<Type>(bag)).ToArray();
+            return result;
         }
 
         public static IReadOnlyList<Type> ScanForTypes(TypeQuerySnapshot snapshot)
         {
-            var result = new ConcurrentBag<Type>();
+            var result = new LockableList<Type>();
             var groups = snapshot.Groups;
             var assemblies = snapshot.Assemblies;
 
-            Parallel.ForEach(assemblies, new ParallelOptions()
+            if (assemblies.Count == 1)
             {
-                MaxDegreeOfParallelism = Environment.ProcessorCount / 2
-            }, assembly =>
+                var types = GetAssemblyTypes(assemblies[0]);
+
+                for (var i = 0; i < groups.Count; i++)
+                {
+                    var group = groups[i];
+                    FillListWithMatchingTypes(types, group, result);
+                }
+
+                return result;
+            }
+
+            Parallel.ForEach(assemblies, ParallelRunOptions, assembly =>
             {
-                var types = assembly.GetTypes();
+                var types = GetAssemblyTypes(assembly);
                 var t = new List<Type>();
 
                 for (var i = 0; i < groups.Count; i++)
                 {
                     var group = groups[i];
-                    foreach (Type type in types)
-                    {
-                        if (IsTypeMatchingCriterias(group.Criterias, type)) t.Add(type);
-                    }
+                    FillListWithMatchingTypes(types, group, t);
 
-                    if (t.Count != 0)
-                    {
-                        for (var i1 = 0; i1 < t.Count; i1++)
-                        {
-                            result.Add(t[i1]);
-                        }
-                    }
+                    result.AddRange(t);
                     t.Clear();
                 }
             });
 
-            return new List<Type>(result);
+            return result;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static void FillListWithMatchingTypes(IReadOnlyList<Type> types, TypeQueryGroup group, ICollection<Type> t)
+        {
+            for (var i = 0; i < types.Count; i++)
+            {
+                Type type = types[i];
+                if (IsTypeMatchingCriterias(group.Criterias, type)) t.Add(type);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static Type[] GetAssemblyTypes(Assembly assembly)
+        {
+            return !assembly.IsDynamic ? TypeCache.GetOrAdd(assembly.FullName, s => assembly.GetTypes()) : assembly.GetTypes();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool IsTypeMatchingCriterias(IReadOnlyList<ITypeQueryCriteria> criterias, Type t)
         {
             var isMatch = true;
