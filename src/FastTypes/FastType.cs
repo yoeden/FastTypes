@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using FastTypes.Query;
 using FastTypes.Reflection;
 
 namespace FastTypes
@@ -29,7 +30,7 @@ namespace FastTypes
         new FastActivator<TType> Activator();
     }
 
-    public static class FastType 
+    public static class FastType
     {
         private static readonly Hashtable _cache = new();
 
@@ -48,6 +49,11 @@ namespace FastTypes
                 _cache.Add(t, fastType);
                 return fastType;
             }
+        }
+
+        public static ITypeQueryBuilderAssembly Query()
+        {
+            return new TypeQueryBuilder();
         }
     }
 }
