@@ -16,6 +16,7 @@ namespace FastTypes.Tests.Query.Builder
                         .Targeting(s => s.Classes().Interfaces().ValueTypes())
                 )
                 .Prepare()
+                .Groups[0]
                 .Criterias
                 .FirstOrDefault(criteria => criteria is T);
         }

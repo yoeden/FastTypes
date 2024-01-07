@@ -7,7 +7,7 @@ using FastTypes.Reflection;
 
 namespace FastTypes
 {
-    public sealed class FastType<TType> : IFastType<TType>
+    internal sealed class FastType<TType> : IFastType<TType>
     {
         private readonly FastActivator<TType> _activator;
         private readonly UnmodifiableFastDictionaryByName<FastProperty<TType>> _props;

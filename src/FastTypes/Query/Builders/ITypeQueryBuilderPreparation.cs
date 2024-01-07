@@ -1,7 +1,7 @@
 ﻿namespace FastTypes.Query
 {
-    public interface ITypeQueryBuilderPreparation
+    public interface ITypeQueryBuilderPreparation : ITypeQueryBuilderAppend
     {
-        TypeQueryContext Prepare();
+        TypeQuerySnapshot Prepare();
     }
 }

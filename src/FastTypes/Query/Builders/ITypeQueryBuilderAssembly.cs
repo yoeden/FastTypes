@@ -3,16 +3,20 @@ using System.Reflection;
 
 namespace FastTypes.Query
 {
+    /// <summary>
+    /// Allows the user to select from which assemblies he wants to apply to scan on.
+    /// The entry point of the query API.
+    /// </summary>
     public interface ITypeQueryBuilderAssembly
     {
-        ITypeQueryBuilderTypes FromAssembly(Assembly assembly);
+        ITypeQueryBuilderTargets FromAssembly(Assembly assembly);
 
-        ITypeQueryBuilderTypes FromAssemblies(params Assembly[] assemblies);
+        ITypeQueryBuilderTargets FromAssemblies(params Assembly[] assemblies);
 
-        ITypeQueryBuilderTypes FromAllAssemblies();
+        ITypeQueryBuilderTargets FromAllAssemblies();
 
-        ITypeQueryBuilderTypes AssemblyOfType<T>();
+        ITypeQueryBuilderTargets AssemblyOfType<T>();
 
-        ITypeQueryBuilderTypes AssemblyOfType(Type t);
+        ITypeQueryBuilderTargets AssemblyOfType(Type t);
     }
 }

@@ -11,7 +11,7 @@ namespace FastTypes.Tests.Query.Builder
 {
     public class TypeQueryBuilderAssemblyTests
     {
-        private static IReadOnlyList<Assembly> GetAssembliesFromBuilder(Func<ITypeQueryBuilderAssembly, ITypeQueryBuilderTypes> action)
+        private static IReadOnlyList<Assembly> GetAssembliesFromBuilder(Func<ITypeQueryBuilderAssembly, ITypeQueryBuilderTargets> action)
         {
             var builder = new TypeQueryBuilder();
             return action(builder)

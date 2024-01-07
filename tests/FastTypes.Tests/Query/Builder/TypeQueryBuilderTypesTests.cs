@@ -11,6 +11,7 @@ namespace FastTypes.Tests.Query.Builder
             return (TypeCriteria)builder.FromAllAssemblies()
                 .Targeting(action)
                 .Prepare()
+                .Groups[0]
                 .Criterias
                 .FirstOrDefault(criteria => criteria is TypeCriteria);
         }

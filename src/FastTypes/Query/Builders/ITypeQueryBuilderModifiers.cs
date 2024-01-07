@@ -2,9 +2,16 @@
 
 namespace FastTypes.Query
 {
+    public interface ITypeQueryBuilderAppend
+    {
+        ITypeQueryBuilderTargets And();
+    }
+
     public interface ITypeQueryBuilderModifiers : ITypeQueryBuilderPreparation
     {
         ITypeQueryBuilderModifiers WithCriteria(ITypeQueryCriteria criteria);
+
+        ITypeQueryBuilderModifiers Tag<T>(T tag);
 
         ITypeQueryBuilderModifiers NotPublic();
 

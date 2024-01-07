@@ -42,4 +42,8 @@
     <None Include="logo.png" Pack="true" PackagePath="" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Query\FastTypeExtenstions\" />
+  </ItemGroup>
+
 </Project>
