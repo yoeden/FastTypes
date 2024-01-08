@@ -1,4 +1,4 @@
-﻿namespace FastTypes.Reflection
+﻿namespace FastTypes.Compiler
 {
     internal static class ReflectionCompiler
     {

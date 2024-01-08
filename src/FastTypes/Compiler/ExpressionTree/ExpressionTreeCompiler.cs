@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace FastTypes.Reflection
+namespace FastTypes.Compiler
 {
     public sealed class ExpressionTreeCompiler : IReflectionCompiler
     {

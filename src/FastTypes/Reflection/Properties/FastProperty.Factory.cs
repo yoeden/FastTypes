@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using FastTypes.Compiler;
 
 namespace FastTypes.Reflection
 {
