@@ -3,6 +3,9 @@ using System.Reflection;
 
 namespace FastTypes.Query
 {
+    /// <summary>
+    /// Criteria to check if the type contains a given attribute.
+    /// </summary>
     public sealed class AttributeCriteria : ITypeQueryCriteria
     {
         private readonly Type _attributeType;
@@ -15,11 +18,13 @@ namespace FastTypes.Query
             _attributeType = attributeType;
         }
 
+        /// <inheritdoc cref="IsMatching"/>
         public bool IsMatching(Type t)
         {
             return t.GetCustomAttribute(_attributeType) != null;
         }
 
+        /// <inheritdoc cref="Priority"/>
         public int Priority => QueryCriteriaPriority.Low;
     }
 }

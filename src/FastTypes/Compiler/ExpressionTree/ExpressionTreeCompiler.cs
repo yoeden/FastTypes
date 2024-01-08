@@ -4,8 +4,12 @@ using System.Reflection;
 
 namespace FastTypes.Compiler
 {
-    public sealed class ExpressionTreeCompiler : IReflectionCompiler
+    /// <summary>
+    /// Expression tree compiler
+    /// </summary>
+    internal sealed class ExpressionTreeCompiler : IReflectionCompiler
     {
+        /// <inheritdoc />
         public Delegate Setter(PropertyInfo property)
         {
             var instance = Expression.Parameter(property.DeclaringType, "instance");
@@ -13,6 +17,7 @@ namespace FastTypes.Compiler
             return Expression.Lambda(typeof(Action<,>).MakeGenericType(property.DeclaringType, property.PropertyType), Expression.Call(property.SetMethod.IsStatic ? null : instance, property.SetMethod, value), instance, value).Compile();
         }
 
+        /// <inheritdoc />
         public Delegate SetterWithObjectParameter(PropertyInfo property)
         {
             var instance = Expression.Parameter(property.DeclaringType, "instance");
@@ -20,6 +25,7 @@ namespace FastTypes.Compiler
             return Expression.Lambda(typeof(Action<,>).MakeGenericType(property.DeclaringType, typeof(object)), Expression.Call(property.SetMethod.IsStatic ? null : instance, property.SetMethod, Expression.Convert(value, property.PropertyType)), instance, value).Compile();
         }
 
+        /// <inheritdoc />
         public Delegate Getter(PropertyInfo property)
         {
             var instance = Expression.Parameter(property.DeclaringType, "instance");
@@ -27,12 +33,14 @@ namespace FastTypes.Compiler
             return Expression.Lambda(lambdaType, Expression.Call(property.GetMethod.IsStatic ? null : instance, property.GetMethod), instance).Compile();
         }
 
+        /// <inheritdoc />
         public Delegate GetterWithObjectReturn(PropertyInfo property)
         {
             var instance = Expression.Parameter(property.DeclaringType, "instance");
             return Expression.Lambda(typeof(Func<,>).MakeGenericType(property.DeclaringType, typeof(object)), Expression.Convert(Expression.Call(property.GetMethod.IsStatic ? null : instance, property.GetMethod), typeof(object)), instance).Compile();
         }
 
+        /// <inheritdoc />
         public Delegate Method(MethodInfo info)
         {
             var instance = Expression.Parameter(info.DeclaringType, "instance");
@@ -44,7 +52,7 @@ namespace FastTypes.Compiler
 
             for (int i = 0; i < args.Length; i++)
             {
-                var p = Expression.Parameter(parameters[i].ParameterType,$"i{i}");
+                var p = Expression.Parameter(parameters[i].ParameterType, $"i{i}");
                 args[i] = p;
                 compileArgs[i + 1] = p;
             }
@@ -53,6 +61,7 @@ namespace FastTypes.Compiler
             return Expression.Lambda(call, compileArgs).Compile();
         }
 
+        /// <inheritdoc />
         public Delegate MethodReturnObject(MethodInfo info)
         {
             var instance = Expression.Parameter(info.DeclaringType, "instance");
@@ -73,6 +82,7 @@ namespace FastTypes.Compiler
             return Expression.Lambda(Expression.Convert(call, typeof(object)), compileArgs).Compile();
         }
 
+        /// <inheritdoc />
         public Delegate Activator(ConstructorInfo info)
         {
             var parameters = info.GetParameters();
