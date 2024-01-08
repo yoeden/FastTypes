@@ -44,7 +44,9 @@ namespace FastTypes.Reflection
 
             for (int i = 0; i < args.Length; i++)
             {
-                args[i] = Expression.Parameter(parameters[i].ParameterType);
+                var p = Expression.Parameter(parameters[i].ParameterType,$"i{i}");
+                args[i] = p;
+                compileArgs[i + 1] = p;
             }
 
             var call = Expression.Call(info.IsStatic ? null : instance, info, args);
@@ -62,7 +64,9 @@ namespace FastTypes.Reflection
 
             for (int i = 0; i < args.Length; i++)
             {
-                args[i] = Expression.Parameter(parameters[i].ParameterType);
+                var p = Expression.Parameter(parameters[i].ParameterType, $"i{i}");
+                args[i] = p;
+                compileArgs[i + 1] = p;
             }
 
             var call = Expression.Call(info.IsStatic ? null : instance, info, args);
