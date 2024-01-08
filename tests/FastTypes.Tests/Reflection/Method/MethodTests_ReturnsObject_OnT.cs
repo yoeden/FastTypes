@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using FastTypes.Reflection;
+using FluentAssertions;
 using NSubstitute;
 
 namespace FastTypes.Tests.Reflection.Method

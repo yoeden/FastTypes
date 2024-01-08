@@ -27,6 +27,8 @@ namespace FastTypes.Tests.Query.Criterias
             {
                 return false;
             }
+
+            public int Priority => QueryCriteriaPriority.Mid;
         }
     }
 }

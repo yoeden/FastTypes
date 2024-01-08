@@ -2,6 +2,9 @@
 
 namespace FastTypes.Query
 {
+    /// <summary>
+    /// Criteria to check the type.
+    /// </summary>
     public sealed class TypeCriteria : ITypeQueryCriteria
     {
         private readonly bool _isClass;
@@ -19,6 +22,7 @@ namespace FastTypes.Query
             _isEnum = isEnum;
         }
 
+        /// <inheritdoc cref="IsMatching"/>
         public bool IsMatching(Type t)
         {
             if (t.IsEnum && _isEnum) return true;
@@ -29,9 +33,27 @@ namespace FastTypes.Query
             return false;
         }
 
+        /// <inheritdoc cref="Priority"/>
+        public int Priority => QueryCriteriaPriority.High;
+
+        /// <summary>
+        /// Gets a value indicating whether the object is a class.
+        /// </summary>
         public bool IsClass => _isClass;
+
+        /// <summary>
+        /// Gets a value indicating whether the object is a value type.
+        /// </summary>
         public bool IsValueType => _isValueType;
+
+        /// <summary>
+        /// Gets a value indicating whether the object is an interface.
+        /// </summary>
         public bool IsInterface => _isInterface;
+
+        /// <summary>
+        /// Gets a value indicating whether the object is an enumeration.
+        /// </summary>
         public bool IsEnum => _isEnum;
     }
 }

@@ -1,5 +1,8 @@
 ﻿namespace FastTypes.Reflection
 {
+    /// <summary>
+    /// This class provides support for instanciating a given Type.
+    /// </summary>
     public abstract class FastActivator
     {
         /// <summary>

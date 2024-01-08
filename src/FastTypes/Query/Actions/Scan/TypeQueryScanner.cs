@@ -9,16 +9,29 @@ using FastTypes.DataStructures;
 
 namespace FastTypes.Query
 {
+    /// <summary>
+    /// Assembly scanner based on a given query snapshot.
+    /// </summary>
     public static class TypeQueryScanner
     {
+        // Cache to store types per assembly
         private static readonly ConcurrentDictionary<string, Type[]> TypeCache = new();
 
+        // Options for parallel execution
         private static readonly ParallelOptions ParallelRunOptions =
             new()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount / 2
             };
 
+        /// <summary>
+        /// Scanning an assemblies from <see cref="TypeQuerySnapshot.Assemblies"/> and grouping the result based on <see cref="TypeQuerySnapshot.Groups"/>
+        /// </summary>
+        /// <param name="snapshot">The query snapshot containing the groups and assemblies to scan.</param>
+        /// <returns>A list of grouped types.</returns>
+        /// <remarks>
+        /// Since each group is treated as its own unit, duplicate types may occur between groups (Group A and B may contain the same type).
+        /// </remarks>
         public static IReadOnlyList<IReadOnlyList<Type>> ScanForGroupedTypes(TypeQuerySnapshot snapshot)
         {
             var result = new List<LockableList<Type>>();
@@ -59,10 +72,17 @@ namespace FastTypes.Query
             return result;
         }
 
+        /// <summary>
+        /// Scanning an assemblies from <see cref="TypeQuerySnapshot.Assemblies"/> and aggregating the result based on <see cref="TypeQuerySnapshot.Groups"/>
+        /// </summary>
+        /// <param name="snapshot">The query snapshot containing the groups and assemblies to scan.</param>
+        /// <returns>A list of types</returns>
+        /// <remarks>
+        /// The returned list is promised to be unique even if groups will duplicate the same result
+        /// </remarks>
         public static IReadOnlyList<Type> ScanForTypes(TypeQuerySnapshot snapshot)
         {
-            //TODO: Should be unique
-            var result = new LockableList<Type>();
+            var result = new LockableSet<Type>();
             var groups = snapshot.Groups;
             var assemblies = snapshot.Assemblies;
 

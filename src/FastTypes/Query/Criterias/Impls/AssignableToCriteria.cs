@@ -2,6 +2,10 @@
 
 namespace FastTypes.Query
 {
+    /// <summary>
+    /// Criteria to check if the type is assignable to another given type.
+    /// Generics supported.
+    /// </summary>
     public sealed class AssignableToCriteria : ITypeQueryCriteria
     {
         private readonly Type _target;
@@ -11,8 +15,10 @@ namespace FastTypes.Query
             _target = target ?? throw new ArgumentNullException(nameof(target));
         }
 
+        /// <inheritdoc cref="Priority"/>
         public int Priority => QueryCriteriaPriority.Mid;
 
+        /// <inheritdoc cref="IsMatching"/>
         public bool IsMatching(Type t)
         {
             //TODO: Add unit test for this

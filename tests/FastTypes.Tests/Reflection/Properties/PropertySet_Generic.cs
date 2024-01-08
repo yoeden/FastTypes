@@ -1,4 +1,6 @@
-﻿using FluentAssertions;
+﻿using FastTypes.Reflection;
+using FastTypes.Reflection.Exceptions;
+using FluentAssertions;
 
 namespace FastTypes.Tests.Reflection.Properties
 {
