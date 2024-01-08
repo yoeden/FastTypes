@@ -10,6 +10,7 @@ using NSubstitute;
 
 namespace FastTypes.Tests.Query.Instantiator
 {
+    [Trait(Traits.Query.Tag,Traits.Query.Instanciator)]
     public class QueryInstantiatorTests
     {
         [Fact]

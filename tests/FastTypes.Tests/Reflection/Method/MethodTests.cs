@@ -7,7 +7,7 @@ using FluentAssertions;
 
 namespace FastTypes.Tests.Reflection.Method
 {
-    [Trait(Traits.Reflection, Traits.Reflection_Method)]
+    [Trait(Traits.Reflection.Tag, Traits.Reflection.Method)]
     public class MethodTests
     {
         protected readonly IFastType<MethodsClass> _fastType;

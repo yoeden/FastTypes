@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FastTypes.Reflection.Exceptions
+namespace FastTypes.Reflection
 {
     /// <summary>
     /// Exception thrown when a member's type is unexpected.

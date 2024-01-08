@@ -9,6 +9,7 @@ using NSubstitute;
 
 namespace FastTypes.Tests.Query.Criterias
 {
+    [Trait(Traits.Query.Tag,Traits.Query.Criterias)]
     public class TypeQueryCriteriaInterfaceTests
     {
         [Fact]

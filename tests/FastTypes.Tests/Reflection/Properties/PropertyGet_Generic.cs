@@ -8,7 +8,8 @@ using FluentAssertions;
 
 namespace FastTypes.Tests.Reflection.Properties
 {
-    [Trait(Traits.Reflection, Traits.Reflection_Properties_Get)]
+    [Trait(Traits.Reflection.Tag, Traits.Reflection.Properties)]
+    [Trait(Traits.Reflection.Tag, Traits.Reflection.PropertiesGet)]
     public class PropertyGet_Generic
     {
         private readonly IFastType<StubPropertyClass> _fastType;

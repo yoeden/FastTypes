@@ -3,7 +3,7 @@ using FluentAssertions;
 
 namespace FastTypes.Tests.Reflection
 {
-    [Trait(Traits.FastType, "")]
+    [Trait(Traits.FastType.Tag, "")]
     public class FastTypeTests
     {
         [Fact]

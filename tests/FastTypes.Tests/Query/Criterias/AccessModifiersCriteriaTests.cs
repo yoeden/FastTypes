@@ -3,6 +3,7 @@ using FluentAssertions;
 
 namespace FastTypes.Tests.Query.Criterias
 {
+    [Trait(Traits.Query.Tag,Traits.Query.Criterias)]
     public class AccessModifiersCriteriaTests
     {
         [Fact]

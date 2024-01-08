@@ -11,6 +11,7 @@ namespace FastTypes.DataStructures
 
         public static UnmodifiableFastDictionaryByName<TValue> Create(IReadOnlyList<KeyValuePair<string, TValue>> values)
         {
+            //TODO: Add this to the compile interface
             if (values.Count == 0) return Empty;
 
             DynamicMethod method = new("", typeof(int), new[] { typeof(string) });
@@ -73,4 +74,5 @@ namespace FastTypes.DataStructures
 
         public bool ContainsKey(string key) => _resolver(key) != -1;
     }
+
 }

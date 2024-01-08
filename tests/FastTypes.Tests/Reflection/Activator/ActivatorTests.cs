@@ -9,7 +9,7 @@ using FluentAssertions;
 
 namespace FastTypes.Tests.Reflection.Activator
 {
-    [Trait(Traits.Reflection,Traits.Reflection_Activator)]
+    [Trait(Traits.Reflection.Tag, Traits.Reflection.Activator)]
     public class ActivatorTests
     {
         private readonly IFastType _fastType;

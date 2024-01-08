@@ -9,6 +9,7 @@ using FluentAssertions;
 
 namespace FastTypes.Tests.Query.Builder
 {
+    [Trait(Traits.Query.Tag,Traits.Query.Builder)]
     public class TypeQueryBuilderAssemblyTests
     {
         private static IReadOnlyList<Assembly> GetAssembliesFromBuilder(Func<ITypeQueryBuilderAssembly, ITypeQueryBuilderTarget> action)

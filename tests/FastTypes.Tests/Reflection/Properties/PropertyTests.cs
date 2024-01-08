@@ -7,7 +7,7 @@ using FluentAssertions;
 
 namespace FastTypes.Tests.Reflection.Properties
 {
-    [Trait(Traits.Reflection,Traits.Reflection_Properties)]
+    [Trait(Traits.Reflection.Tag, Traits.Reflection.Properties)]
     public class PropertyTests
     {
         private readonly IFastType<StubPropertyClass> _fastType;

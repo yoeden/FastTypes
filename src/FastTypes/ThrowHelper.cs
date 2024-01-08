@@ -1,7 +1,6 @@
 ﻿using System;
 using FastTypes.Query;
 using FastTypes.Reflection;
-using FastTypes.Reflection.Exceptions;
 
 namespace FastTypes
 {

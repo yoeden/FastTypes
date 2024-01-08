@@ -23,7 +23,7 @@ namespace FastTypes.Tests.Reflection.Method
         public int Arg5 { get; }
     }
 
-    [Trait(Traits.Reflection, Traits.Reflection_Method)]
+    [Trait(Traits.Reflection.Tag, Traits.Reflection.Method)]
     public class MethodTests_Void_OnObject
     {
         //DONT CHANGE, it should be invoked on object overloads

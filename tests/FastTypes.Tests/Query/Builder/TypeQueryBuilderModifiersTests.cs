@@ -4,6 +4,7 @@ using FluentAssertions;
 
 namespace FastTypes.Tests.Query.Builder
 {
+    [Trait(Traits.Query.Tag,Traits.Query.Builder)]
     public class TypeQueryBuilderModifiersTests
     {
         private static T GetCriteriaFromBuilder<T>(Func<ITypeQueryBuilderModifiers, ITypeQueryBuilderModifiers> func)

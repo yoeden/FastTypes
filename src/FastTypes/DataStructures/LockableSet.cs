@@ -1,22 +1,28 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace FastTypes.DataStructures
 {
-    internal sealed class LockableList<T> : IReadOnlyList<T>, ICollection<T>
+    internal sealed class LockableSet<T> : IReadOnlyList<T>, ICollection<T>
     {
         private readonly List<T> _lst;
+        private readonly Dictionary<T, int> _dic;
 
-        public LockableList()
+        public LockableSet()
         {
             _lst = new List<T>();
+            _dic = new Dictionary<T, int>();
         }
 
         public void Add(T value)
         {
             lock (_lst)
             {
-                _lst.Add(value);
+                if (_dic.TryAdd(value, _lst.Count))
+                {
+                    _lst.Add(value);
+                }
             }
         }
 
@@ -25,24 +31,19 @@ namespace FastTypes.DataStructures
             lock (_lst)
             {
                 _lst.Clear();
+                _dic.Clear();
             }
         }
 
-        public bool Contains(T item) => _lst.Contains(item);
+        public bool Contains(T item) => _dic.ContainsKey(item);
 
-        public void CopyTo(T[] array, int arrayIndex)
-        {
-            lock (_lst)
-            {
-                _lst.CopyTo(array, arrayIndex);
-            }
-        }
+        public void CopyTo(T[] array, int arrayIndex) => throw new NotImplementedException();
 
         public bool Remove(T item)
         {
             lock (_lst)
             {
-                return _lst.Remove(item);
+                return _lst.Remove(item) && _dic.Remove(item);
             }
         }
 
@@ -50,7 +51,10 @@ namespace FastTypes.DataStructures
         {
             lock (_lst)
             {
-                _lst.AddRange(values);
+                foreach (T value in values)
+                {
+                    Add(value);
+                }
             }
         }
 

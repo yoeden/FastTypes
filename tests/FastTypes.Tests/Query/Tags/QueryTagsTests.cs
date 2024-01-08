@@ -9,6 +9,7 @@ using FluentAssertions;
 
 namespace FastTypes.Tests.Query.Tags
 {
+    [Trait(Traits.Query.Tag,Traits.Query.Tags)]
     public class QueryTagsTests
     {
         [Fact]
