@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace FastTypes.Query
 {
-    internal sealed partial class TypeQueryBuilder : ITypeQueryBuilderAssembly, ITypeQueryBuilderTargets, ITypeQueryBuilderModifiers
+    internal sealed partial class TypeQueryBuilder : ITypeQueryBuilderAssembly, ITypeQueryBuilderTarget, ITypeQueryBuilderModifiers
     {
         private readonly List<Assembly> _assemblies = new();
         private readonly List<TypeQueryGroup> _groups = new();
@@ -14,28 +14,28 @@ namespace FastTypes.Query
 
         //
 
-        public ITypeQueryBuilderTargets FromAssembly(Assembly assembly)
+        public ITypeQueryBuilderTarget FromAssembly(Assembly assembly)
         {
             if (assembly == null) throw new ArgumentNullException(nameof(assembly));
             return FromAssemblies(assembly);
         }
 
-        public ITypeQueryBuilderTargets FromAllAssemblies()
+        public ITypeQueryBuilderTarget FromAllAssemblies()
         {
             return FromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
         }
 
-        public ITypeQueryBuilderTargets AssemblyOfType<T>()
+        public ITypeQueryBuilderTarget AssemblyContaining<T>()
         {
             return FromAssemblies(typeof(T).Assembly);
         }
 
-        public ITypeQueryBuilderTargets AssemblyOfType(Type t)
+        public ITypeQueryBuilderTarget AssemblyContaining(Type t)
         {
             return FromAssemblies(t.Assembly);
         }
 
-        public ITypeQueryBuilderTargets FromAssemblies(params Assembly[] assemblies)
+        public ITypeQueryBuilderTarget FromAssemblies(params Assembly[] assemblies)
         {
             _assemblies.AddRange(assemblies);
             return this;
@@ -43,7 +43,7 @@ namespace FastTypes.Query
 
         //
 
-        public ITypeQueryBuilderModifiers Targeting(Action<ITypeSelector> types)
+        public ITypeQueryBuilderModifiers Target(Action<ITypeSelector> types)
         {
             var selector = new TypeSelector();
             types(selector);
@@ -113,14 +113,14 @@ namespace FastTypes.Query
             return WithCriteria(new AssignableToCriteria(t));
         }
 
-        public TypeQuerySnapshot Prepare()
+        public TypeQuerySnapshot Snapshot()
         {
             SealCurrentScope();
 
             return new TypeQuerySnapshot(_assemblies.AsReadOnly(), _groups.AsReadOnly());
         }
 
-        public ITypeQueryBuilderTargets And()
+        public ITypeQueryBuilderTarget And()
         {
             SealCurrentScope();
 

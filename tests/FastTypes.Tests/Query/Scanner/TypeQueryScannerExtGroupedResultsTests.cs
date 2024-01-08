@@ -16,7 +16,7 @@ namespace FastTypes.Tests.Query.Scanner
             var result = FastType
                 .Query()
                 .FromAssembly(assembly)
-                .Targeting(selector => selector.Classes())
+                .Target(selector => selector.Classes())
                 .FindGroupedTypes();
 
             //
@@ -36,9 +36,9 @@ namespace FastTypes.Tests.Query.Scanner
             var result = FastType
                 .Query()
                 .FromAssembly(assembly)
-                .AllClasses()
+                .TargetClasses()
                 .And()
-                .AllInterfaces()
+                .TargetInterfaces()
                 .FindGroupedTypes();
 
             //
@@ -58,7 +58,7 @@ namespace FastTypes.Tests.Query.Scanner
             var result = FastType
                 .Query()
                 .FromAssemblies(assemblies)
-                .Targeting(selector => selector.Classes())
+                .Target(selector => selector.Classes())
                 .FindGroupedTypes();
 
             //
@@ -78,9 +78,9 @@ namespace FastTypes.Tests.Query.Scanner
             var result = FastType
                 .Query()
                 .FromAssemblies(assemblies)
-                .AllClasses()
+                .TargetClasses()
                 .And()
-                .AllInterfaces()
+                .TargetInterfaces()
                 .FindGroupedTypes();
 
             //

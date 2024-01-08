@@ -4,7 +4,7 @@ namespace FastTypes.Query
 {
     public interface ITypeQueryBuilderAppend
     {
-        ITypeQueryBuilderTargets And();
+        ITypeQueryBuilderTarget And();
     }
 
     public interface ITypeQueryBuilderModifiers : ITypeQueryBuilderPreparation

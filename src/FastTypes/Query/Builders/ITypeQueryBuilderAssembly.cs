@@ -9,14 +9,39 @@ namespace FastTypes.Query
     /// </summary>
     public interface ITypeQueryBuilderAssembly
     {
-        ITypeQueryBuilderTargets FromAssembly(Assembly assembly);
+        /// <summary>
+        /// Specifies a single assembly to scan on.
+        /// </summary>
+        /// <param name="assembly">The assembly to scan on.</param>
+        /// <returns>A type query builder for selecting targets.</returns>
+        ITypeQueryBuilderTarget FromAssembly(Assembly assembly);
 
-        ITypeQueryBuilderTargets FromAssemblies(params Assembly[] assemblies);
+        /// <summary>
+        /// Specifies multiple assemblies to scan on.
+        /// </summary>
+        /// <param name="assemblies">The assemblies to scan on.</param>
+        /// <returns>A type query builder for selecting targets.</returns>
+        ITypeQueryBuilderTarget FromAssemblies(params Assembly[] assemblies);
 
-        ITypeQueryBuilderTargets FromAllAssemblies();
+        /// <summary>
+        /// Specifies to scan on all available assemblies.
+        /// </summary>
+        /// <returns>A type query builder for selecting targets.</returns>
+        ITypeQueryBuilderTarget FromAllAssemblies();
 
-        ITypeQueryBuilderTargets AssemblyOfType<T>();
+        /// <summary>
+        /// Specifies to scan on the assembly containing a specific type.
+        /// </summary>
+        /// <typeparam name="T">The type contained in the assembly to scan on.</typeparam>
+        /// <returns>A type query builder for selecting targets.</returns>
+        ITypeQueryBuilderTarget AssemblyContaining<T>();
 
-        ITypeQueryBuilderTargets AssemblyOfType(Type t);
+        /// <summary>
+        /// Specifies to scan on the assembly containing a specific type.
+        /// </summary>
+        /// <param name="t">The type contained in the assembly to scan on.</param>
+        /// <returns>A type query builder for selecting targets.</returns>
+        ITypeQueryBuilderTarget AssemblyContaining(Type t);
+
     }
 }
