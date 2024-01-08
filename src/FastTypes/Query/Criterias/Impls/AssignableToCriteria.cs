@@ -15,7 +15,12 @@ namespace FastTypes.Query
 
         public bool IsMatching(Type t)
         {
-            if (_target.ContainsGenericParameters)
+            //TODO: Add unit test for this
+            if (t == _target)
+            {
+                return true;
+            }
+            else if (_target.ContainsGenericParameters)
             {
                 if (_target.IsClass)
                 {
