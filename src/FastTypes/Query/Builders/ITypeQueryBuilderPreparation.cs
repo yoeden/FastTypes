@@ -2,6 +2,6 @@
 {
     public interface ITypeQueryBuilderPreparation : ITypeQueryBuilderAppend
     {
-        TypeQuerySnapshot Prepare();
+        TypeQuerySnapshot Snapshot();
     }
 }

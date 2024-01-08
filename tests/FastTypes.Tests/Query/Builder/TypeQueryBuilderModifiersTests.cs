@@ -13,9 +13,9 @@ namespace FastTypes.Tests.Query.Builder
             return (T)func(
                     builder
                         .FromAllAssemblies()
-                        .Targeting(s => s.Classes().Interfaces().ValueTypes())
+                        .Target(s => s.Classes().Interfaces().ValueTypes())
                 )
-                .Prepare()
+                .Snapshot()
                 .Groups[0]
                 .Criterias
                 .FirstOrDefault(criteria => criteria is T);

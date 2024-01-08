@@ -19,7 +19,6 @@ namespace FastTypes.Query
                 MaxDegreeOfParallelism = Environment.ProcessorCount / 2
             };
 
-        //TODO: Create an IReadOnlyList array proxy class and use List from object pool
         public static IReadOnlyList<IReadOnlyList<Type>> ScanForGroupedTypes(TypeQuerySnapshot snapshot)
         {
             var result = new List<LockableList<Type>>();

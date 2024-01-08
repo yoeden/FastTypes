@@ -16,8 +16,8 @@ namespace FastTypes.Tests.Query.Scanner
             var snapshot = FastType
                 .Query()
                 .FromAssembly(assembly)
-                .Targeting(selector => selector.Classes())
-                .Prepare();
+                .Target(selector => selector.Classes())
+                .Snapshot();
 
             //
             var result = TypeQueryScanner.ScanForTypes(snapshot);
@@ -37,10 +37,10 @@ namespace FastTypes.Tests.Query.Scanner
             var snapshot = FastType
                 .Query()
                 .FromAssembly(assembly)
-                .AllClasses()
+                .TargetClasses()
                 .And()
-                .AllInterfaces()
-                .Prepare();
+                .TargetInterfaces()
+                .Snapshot();
 
             //
             var result = TypeQueryScanner.ScanForTypes(snapshot);
@@ -60,8 +60,8 @@ namespace FastTypes.Tests.Query.Scanner
             var snapshot = FastType
                 .Query()
                 .FromAssemblies(assemblies)
-                .Targeting(selector => selector.Classes())
-                .Prepare();
+                .Target(selector => selector.Classes())
+                .Snapshot();
 
             //
             var result = TypeQueryScanner.ScanForTypes(snapshot);
@@ -82,10 +82,10 @@ namespace FastTypes.Tests.Query.Scanner
             var snapshot = FastType
                 .Query()
                 .FromAssemblies(assemblies)
-                .AllClasses()
+                .TargetClasses()
                 .And()
-                .AllInterfaces()
-                .Prepare();
+                .TargetInterfaces()
+                .Snapshot();
 
             //
             var result = TypeQueryScanner.ScanForTypes(snapshot);

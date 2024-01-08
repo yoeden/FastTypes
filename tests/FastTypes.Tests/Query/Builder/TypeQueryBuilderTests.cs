@@ -11,12 +11,12 @@ namespace FastTypes.Tests.Query.Builder
 {
     public class TypeQueryBuilderAssemblyTests
     {
-        private static IReadOnlyList<Assembly> GetAssembliesFromBuilder(Func<ITypeQueryBuilderAssembly, ITypeQueryBuilderTargets> action)
+        private static IReadOnlyList<Assembly> GetAssembliesFromBuilder(Func<ITypeQueryBuilderAssembly, ITypeQueryBuilderTarget> action)
         {
             var builder = new TypeQueryBuilder();
             return action(builder)
-                .Targeting(selector => selector.Classes())
-                .Prepare()
+                .Target(selector => selector.Classes())
+                .Snapshot()
                 .Assemblies;
         }
 
@@ -55,7 +55,7 @@ namespace FastTypes.Tests.Query.Builder
 
             //
             var result = GetAssembliesFromBuilder(
-                builder => builder.AssemblyOfType<TypeQueryBuilderAssemblyTests>()
+                builder => builder.AssemblyContaining<TypeQueryBuilderAssemblyTests>()
             );
 
             //
@@ -70,7 +70,7 @@ namespace FastTypes.Tests.Query.Builder
 
             //
             var result = GetAssembliesFromBuilder(
-                builder => builder.AssemblyOfType(typeof(TypeQueryBuilderAssemblyTests))
+                builder => builder.AssemblyContaining(typeof(TypeQueryBuilderAssemblyTests))
             );
 
             //

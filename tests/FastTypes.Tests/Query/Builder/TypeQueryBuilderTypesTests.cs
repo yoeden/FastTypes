@@ -9,8 +9,8 @@ namespace FastTypes.Tests.Query.Builder
         {
             var builder = new TypeQueryBuilder();
             return (TypeCriteria)builder.FromAllAssemblies()
-                .Targeting(action)
-                .Prepare()
+                .Target(action)
+                .Snapshot()
                 .Groups[0]
                 .Criterias
                 .FirstOrDefault(criteria => criteria is TypeCriteria);
