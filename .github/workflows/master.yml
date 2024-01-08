@@ -22,10 +22,10 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Install dependencies 📂
-        run: dotnet restore
+        run: dotnet restore --nologo
 
       - name: Build 🧱
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build --configuration Release --no-restore --nologo /p:ContinuousIntegrationBuild=true
 
       - name: Test 🧪
-        run: dotnet test --configuration Release --no-build
+        run: dotnet test --configuration Release --no-build --nologo /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
