@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\FastTypes\FastTypes.csproj" />
+    <ProjectReference Include="..\..\src\FastTypes\FastTypes.csproj" />
   </ItemGroup>
 
 </Project>
