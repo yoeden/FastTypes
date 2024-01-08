@@ -1,6 +1,4 @@
-﻿using FastTypes.Tests.Query.Criterias;
-
-namespace FastTypes.Tests
+﻿namespace FastTypes.Tests
 {
     public static class Traits
     {

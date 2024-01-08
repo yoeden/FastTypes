@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using FastTypes.Reflection;
+﻿using FastTypes.Reflection;
 using FluentAssertions;
 using NSubstitute;
 

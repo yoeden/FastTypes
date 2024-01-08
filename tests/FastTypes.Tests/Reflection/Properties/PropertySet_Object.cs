@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FastTypes.Reflection;
+﻿using FastTypes.Reflection;
 using FluentAssertions;
 
 namespace FastTypes.Tests.Reflection.Properties

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Reflection;
+﻿using System.Reflection;
 using FastTypes.Compiler;
 
 namespace FastTypes.Reflection
