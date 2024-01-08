@@ -61,6 +61,7 @@ namespace FastTypes.Query
 
         public static IReadOnlyList<Type> ScanForTypes(TypeQuerySnapshot snapshot)
         {
+            //TODO: Should be unique
             var result = new LockableList<Type>();
             var groups = snapshot.Groups;
             var assemblies = snapshot.Assemblies;

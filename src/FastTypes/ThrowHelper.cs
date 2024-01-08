@@ -39,7 +39,22 @@ namespace FastTypes
         {
             throw new NoSuitableConstructorFound(expected);
         }
+
+        public static void FailedToInstanciateType(Type type, Exception exception)
+        {
+            throw new FailedToInstanciateTypeException(type,exception);
+        }
     }
+
+    public sealed class FailedToInstanciateTypeException : InvalidOperationException
+    {
+        public FailedToInstanciateTypeException(Type t, Exception ex) : base($"Failed to instanciate type: {t}", ex)
+        {
+
+        }
+    }
+
+    //TODO: Move all exceptions to their domain exception folder
 
     public sealed class NoSuitableConstructorFound : InvalidOperationException
     {
