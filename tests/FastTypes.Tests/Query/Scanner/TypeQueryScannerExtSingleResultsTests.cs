@@ -3,6 +3,7 @@ using FluentAssertions;
 
 namespace FastTypes.Tests.Query.Scanner
 {
+    [Trait(Traits.Query.Tag,Traits.Query.Scanner)]
     public class TypeQueryScannerExtSingleResultsTests : BaseTypeQueryScanner
     {
         [Fact]

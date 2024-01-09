@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FastTypes.Reflection;
 using FastTypes.Tests.Reflection.Method;
 using FluentAssertions;
 
 namespace FastTypes.Tests.Reflection.Activator
 {
-    [Trait(Traits.Reflection,Traits.Reflection_Activator)]
+    [Trait(Traits.Reflection.Tag, Traits.Reflection.Activator)]
     public class ActivatorTests
     {
         private readonly IFastType _fastType;

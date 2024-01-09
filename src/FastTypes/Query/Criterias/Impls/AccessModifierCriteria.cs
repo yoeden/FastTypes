@@ -2,6 +2,9 @@
 
 namespace FastTypes.Query
 {
+    /// <summary>
+    /// Criteria to check if the type is either public or non-public (internal, protected, private).
+    /// </summary>
     public sealed class AccessModifierCriteria : ITypeQueryCriteria
     {
         private readonly bool _isPublic;
@@ -11,6 +14,7 @@ namespace FastTypes.Query
             _isPublic = isPublic;
         }
 
+        /// <inheritdoc cref="IsMatching"/>
         public bool IsMatching(Type t)
         {
             if (!t.IsNested)
@@ -23,5 +27,8 @@ namespace FastTypes.Query
 
             }
         }
+
+        /// <inheritdoc cref="Priority"/>
+        public int Priority => QueryCriteriaPriority.High;
     }
 }

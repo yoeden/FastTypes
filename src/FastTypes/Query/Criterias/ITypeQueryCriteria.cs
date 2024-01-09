@@ -2,30 +2,22 @@
 
 namespace FastTypes.Query
 {
+    /// <summary>
+    /// Represents a criteria for querying types.
+    /// </summary>
     public interface ITypeQueryCriteria
     {
+        /// <summary>
+        /// Checks if the given type matches the criteria.
+        /// </summary>
+        /// <param name="t">The type to check.</param>
+        /// <returns>True if the type matches the criteria, otherwise false.</returns>
         bool IsMatching(Type t);
 
-        int Priority => QueryCriteriaPriority.Mid;
-    }
-
-    public static class QueryCriteriaPriority
-    {
         /// <summary>
-        /// Light and general criterias.
-        /// For example, Public or NorPublic criterias.
+        /// Gets the priority of the criteria.
+        /// Use <see cref="QueryCriteriaPriority"/> .
         /// </summary>
-        public const int High = 100;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public const int Mid = 10000;
-
-        /// <summary>
-        /// Wasteful and time consuming criterias.
-        /// For example, attribute criteria, should only be checked after all others since its wasteful.
-        /// </summary>
-        public const int Low = 1000000;
+        int Priority { get; }
     }
 }

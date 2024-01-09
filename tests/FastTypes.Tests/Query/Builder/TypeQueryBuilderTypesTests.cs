@@ -3,6 +3,7 @@ using FluentAssertions;
 
 namespace FastTypes.Tests.Query.Builder
 {
+    [Trait(Traits.Query.Tag,Traits.Query.Builder)]
     public class TypeQueryBuilderTypesTests
     {
         private static TypeCriteria GetTypeSelectorCriteriaFromBuilder(Action<ITypeSelector> action)

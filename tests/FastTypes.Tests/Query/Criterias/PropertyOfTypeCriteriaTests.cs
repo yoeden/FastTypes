@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FastTypes.Query;
+﻿using FastTypes.Query;
 using FluentAssertions;
 
 namespace FastTypes.Tests.Query.Criterias
 {
+    [Trait(Traits.Query.Tag,Traits.Query.Criterias)]
     public class PropertyOfTypeCriteriaTests
     {
         //

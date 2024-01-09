@@ -4,13 +4,14 @@ using System.Reflection;
 
 namespace FastTypes.Query
 {
-    internal sealed partial class TypeQueryBuilder : ITypeQueryBuilderAssembly, ITypeQueryBuilderTarget, ITypeQueryBuilderModifiers
+    internal sealed partial class TypeQueryBuilder : ITypeQueryBuilderAssembly, ITypeQueryBuilderTarget, ITypeQueryBuilderCriterias
     {
         private readonly List<Assembly> _assemblies = new();
         private readonly List<TypeQueryGroup> _groups = new();
 
         private readonly List<ITypeQueryCriteria> _currentCriteriasScope = new();
         private readonly Dictionary<Type, object> _tags = new();
+        private bool _isNotPublicSet;
 
         //
 
@@ -41,9 +42,24 @@ namespace FastTypes.Query
             return this;
         }
 
+        public ITypeQueryBuilderTarget FromEntryAssembly()
+        {
+            return FromAssembly(Assembly.GetEntryAssembly());
+        }
+
+        public ITypeQueryBuilderTarget FromExecutingAssembly()
+        {
+            return FromAssembly(Assembly.GetExecutingAssembly());
+        }
+
+        public ITypeQueryBuilderTarget FromCallingAssembly()
+        {
+            return FromAssembly(Assembly.GetCallingAssembly());
+        }
+
         //
 
-        public ITypeQueryBuilderModifiers Target(Action<ITypeSelector> types)
+        public ITypeQueryBuilderCriterias Target(Action<ITypeSelector> types)
         {
             var selector = new TypeSelector();
             types(selector);
@@ -55,60 +71,62 @@ namespace FastTypes.Query
 
         //
 
-        public ITypeQueryBuilderModifiers WithCriteria(ITypeQueryCriteria criteria)
+        public ITypeQueryBuilderCriterias WithCriteria(ITypeQueryCriteria criteria)
         {
             _currentCriteriasScope.Add(criteria);
             return this;
         }
 
-        public ITypeQueryBuilderModifiers Tag<T>(T tag)
+        public ITypeQueryBuilderCriterias Tag<T>(T tag)
         {
             //TODO: throw tag already exists
             _tags.Add(tag.GetType(), tag);
             return this;
         }
 
-        public ITypeQueryBuilderModifiers NotPublic()
+        public ITypeQueryBuilderCriterias NotPublic()
         {
+            //TODO: Default search is public types, unit tests this
+            _isNotPublicSet = true;
             return WithCriteria(new AccessModifierCriteria());
         }
 
-        public ITypeQueryBuilderModifiers WithPropertyOfType<T>()
+        public ITypeQueryBuilderCriterias WithPropertyOfType<T>()
         {
             return WithPropertyOfType(typeof(T));
         }
 
-        public ITypeQueryBuilderModifiers WithPropertyOfType(Type t)
+        public ITypeQueryBuilderCriterias WithPropertyOfType(Type t)
         {
             return WithCriteria(new PropertyOfTypeCriteria(t));
         }
 
-        public ITypeQueryBuilderModifiers WithMethodOfType<T>()
+        public ITypeQueryBuilderCriterias WithMethodOfType<T>()
         {
             return WithMethodOfType(typeof(T));
         }
 
-        public ITypeQueryBuilderModifiers WithMethodOfType(Type t)
+        public ITypeQueryBuilderCriterias WithMethodOfType(Type t)
         {
             return WithCriteria(new MethodOfTypeCriteria(t));
         }
 
-        public ITypeQueryBuilderModifiers WithAttribute<T>() where T : Attribute
+        public ITypeQueryBuilderCriterias WithAttribute<T>() where T : Attribute
         {
             return WithAttribute(typeof(T));
         }
 
-        public ITypeQueryBuilderModifiers WithAttribute(Type t)
+        public ITypeQueryBuilderCriterias WithAttribute(Type t)
         {
             return WithCriteria(new AttributeCriteria(t));
         }
 
-        public ITypeQueryBuilderModifiers AssignableTo<T>()
+        public ITypeQueryBuilderCriterias AssignableTo<T>()
         {
             return WithCriteria(new AssignableToCriteria(typeof(T)));
         }
 
-        public ITypeQueryBuilderModifiers AssignableTo(Type t)
+        public ITypeQueryBuilderCriterias AssignableTo(Type t)
         {
             return WithCriteria(new AssignableToCriteria(t));
         }
@@ -132,6 +150,10 @@ namespace FastTypes.Query
 
         private void SealCurrentScope()
         {
+            if (!_isNotPublicSet) _currentCriteriasScope.Add(new AccessModifierCriteria(isPublic: true));
+
+            _isNotPublicSet = false;
+
             var criterias = new List<ITypeQueryCriteria>(_currentCriteriasScope.Count);
             criterias.AddRange(_currentCriteriasScope);
             criterias.TrimExcess();

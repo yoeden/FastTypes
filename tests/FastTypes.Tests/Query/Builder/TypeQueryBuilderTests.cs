@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 using FastTypes.Query;
 using FluentAssertions;
 
 namespace FastTypes.Tests.Query.Builder
 {
+    [Trait(Traits.Query.Tag,Traits.Query.Builder)]
     public class TypeQueryBuilderAssemblyTests
     {
         private static IReadOnlyList<Assembly> GetAssembliesFromBuilder(Func<ITypeQueryBuilderAssembly, ITypeQueryBuilderTarget> action)

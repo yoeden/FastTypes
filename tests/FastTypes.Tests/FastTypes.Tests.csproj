@@ -9,9 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Reflection\Method\MethodTests_ReturnsObject_OnGeneric.cs" />
-    <Compile Remove="Reflection\Method\MethodTests_ReturnsT_OnGeneric.cs" />
-    <Compile Remove="Reflection\Method\MethodTests_Void_OnGeneric.cs" />
+    <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>

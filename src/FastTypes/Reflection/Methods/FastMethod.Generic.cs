@@ -4,6 +4,9 @@ using System.Runtime.CompilerServices;
 
 namespace FastTypes.Reflection
 {
+    /// <summary>
+    /// This class provides support for invoking methods a given Type.
+    /// </summary>
     public sealed partial class FastMethod<TType> : FastMethod
     {
         private readonly Delegate _del;
@@ -19,8 +22,13 @@ namespace FastTypes.Reflection
             ReturnType = info.ReturnType;
         }
 
+        /// <inheritdoc />
         public override string Name { get; }
+
+        /// <inheritdoc />
         public override bool IsStatic { get; }
+
+        /// <inheritdoc />
         public override Type ReturnType { get; }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

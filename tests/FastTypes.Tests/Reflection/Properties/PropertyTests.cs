@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 
 namespace FastTypes.Tests.Reflection.Properties
 {
-    [Trait(Traits.Reflection,Traits.Reflection_Properties)]
+    [Trait(Traits.Reflection.Tag, Traits.Reflection.Properties)]
     public class PropertyTests
     {
         private readonly IFastType<StubPropertyClass> _fastType;

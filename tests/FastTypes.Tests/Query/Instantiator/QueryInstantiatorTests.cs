@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 using FastTypes.Query;
 using FluentAssertions;
-using NSubstitute;
 
 namespace FastTypes.Tests.Query.Instantiator
 {
+    [Trait(Traits.Query.Tag,Traits.Query.Instanciator)]
     public class QueryInstantiatorTests
     {
         [Fact]

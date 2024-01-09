@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FastTypes.Reflection;
 using FluentAssertions;
 
 namespace FastTypes.Tests.Reflection.Properties
 {
-    [Trait(Traits.Reflection, Traits.Reflection_Properties_Set)]
+    [Trait(Traits.Reflection.Tag, Traits.Reflection.Properties)]
+    [Trait(Traits.Reflection.Tag, Traits.Reflection.PropertiesSet)]
     public class PropertySet_Object
     {
         private readonly IFastType _fastType;

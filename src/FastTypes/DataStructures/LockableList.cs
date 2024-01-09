@@ -5,70 +5,61 @@ namespace FastTypes.DataStructures
 {
     internal sealed class LockableList<T> : IReadOnlyList<T>, ICollection<T>
     {
-        private readonly List<T> _listImplementation;
+        private readonly List<T> _lst;
 
         public LockableList()
         {
-            _listImplementation = new List<T>();
+            _lst = new List<T>();
         }
 
         public void Add(T value)
         {
-            lock (_listImplementation)
+            lock (_lst)
             {
-                _listImplementation.Add(value);
+                _lst.Add(value);
             }
         }
 
         public void Clear()
         {
-            lock (_listImplementation)
+            lock (_lst)
             {
-                _listImplementation.Clear();
+                _lst.Clear();
             }
         }
 
-        public bool Contains(T item)
-        {
-            return _listImplementation.Contains(item);
-        }
+        public bool Contains(T item) => _lst.Contains(item);
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            lock (_listImplementation)
+            lock (_lst)
             {
-                _listImplementation.CopyTo(array, arrayIndex);
+                _lst.CopyTo(array, arrayIndex);
             }
         }
 
         public bool Remove(T item)
         {
-            lock (_listImplementation)
+            lock (_lst)
             {
-                return _listImplementation.Remove(item);
+                return _lst.Remove(item);
             }
         }
 
         public void AddRange(IEnumerable<T> values)
         {
-            lock (_listImplementation)
+            lock (_lst)
             {
-                _listImplementation.AddRange(values);
+                _lst.AddRange(values);
             }
         }
 
-        public IEnumerator<T> GetEnumerator()
-        {
-            return _listImplementation.GetEnumerator();
-        }
+        public IEnumerator<T> GetEnumerator() => _lst.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return ((IEnumerable)_listImplementation).GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_lst).GetEnumerator();
 
-        public int Count => _listImplementation.Count;
+        public int Count => _lst.Count;
         public bool IsReadOnly => false;
-        public T this[int index] => _listImplementation[index];
+        public T this[int index] => _lst[index];
     }
 }

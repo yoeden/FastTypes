@@ -2,10 +2,11 @@
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace FastTypes.Reflection
+namespace FastTypes.Compiler
 {
     internal sealed class ILCompiler : IReflectionCompiler
     {
+        /// <inheritdoc />
         public Delegate Setter(PropertyInfo property)
         {
             //
@@ -33,6 +34,7 @@ namespace FastTypes.Reflection
             return method.CreateDelegate(typeof(Action<,>).MakeGenericType(property.DeclaringType, property.PropertyType));
         }
 
+        /// <inheritdoc />
         public Delegate SetterWithObjectParameter(PropertyInfo property)
         {
             //
@@ -65,6 +67,7 @@ namespace FastTypes.Reflection
             return method.CreateDelegate(typeof(Action<,>).MakeGenericType(property.DeclaringType, typeof(object)));
         }
 
+        /// <inheritdoc />
         public Delegate Getter(PropertyInfo property)
         {
             //
@@ -89,6 +92,7 @@ namespace FastTypes.Reflection
             return method.CreateDelegate(typeof(Func<,>).MakeGenericType(property.DeclaringType, property.PropertyType));
         }
 
+        /// <inheritdoc />
         public Delegate GetterWithObjectReturn(PropertyInfo property)
         {
             //
@@ -116,6 +120,7 @@ namespace FastTypes.Reflection
             return method.CreateDelegate(typeof(Func<,>).MakeGenericType(property.DeclaringType, typeof(object)));
         }
 
+        /// <inheritdoc />
         public Delegate Method(MethodInfo info)
         {
             //
@@ -150,8 +155,7 @@ namespace FastTypes.Reflection
             }
         }
 
-
-
+        /// <inheritdoc />
         public Delegate MethodReturnObject(MethodInfo info)
         {
             //
@@ -185,6 +189,7 @@ namespace FastTypes.Reflection
             return CreateTDelegate(method, args);
         }
 
+        /// <inheritdoc />
         public Delegate Activator(ConstructorInfo info)
         {
             //

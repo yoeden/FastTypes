@@ -12,7 +12,7 @@ namespace FastTypes.Query
         /// </summary>
         /// <param name="types">The type selector.</param>
         /// <returns>The type query builder modifiers.</returns>
-        ITypeQueryBuilderModifiers Target(Action<ITypeSelector> types);
+        ITypeQueryBuilderCriterias Target(Action<ITypeSelector> types);
     }
 
     /// <summary>
@@ -25,7 +25,7 @@ namespace FastTypes.Query
         /// </summary>
         /// <param name="types">The type query builder target.</param>
         /// <returns>The type query builder modifiers.</returns>
-        public static ITypeQueryBuilderModifiers TargetClasses(this ITypeQueryBuilderTarget types) =>
+        public static ITypeQueryBuilderCriterias TargetClasses(this ITypeQueryBuilderTarget types) =>
             types.Target(selector => selector.Classes());
 
         /// <summary>
@@ -33,7 +33,31 @@ namespace FastTypes.Query
         /// </summary>
         /// <param name="types">The type query builder target.</param>
         /// <returns>The type query builder modifiers.</returns>
-        public static ITypeQueryBuilderModifiers TargetInterfaces(this ITypeQueryBuilderTarget types) =>
+        public static ITypeQueryBuilderCriterias TargetInterfaces(this ITypeQueryBuilderTarget types) =>
             types.Target(selector => selector.Interfaces());
+
+        /// <summary>
+        /// Sets the target type to value types.
+        /// </summary>
+        /// <param name="types">The type query builder target.</param>
+        /// <returns>The type query builder modifiers.</returns>
+        public static ITypeQueryBuilderCriterias TargetValueTypes(this ITypeQueryBuilderTarget types) =>
+            types.Target(selector => selector.ValueTypes());
+
+        /// <summary>
+        /// Sets the target type to enums.
+        /// </summary>
+        /// <param name="types">The type query builder target.</param>
+        /// <returns>The type query builder modifiers.</returns>
+        public static ITypeQueryBuilderCriterias TargetEnums(this ITypeQueryBuilderTarget types) =>
+            types.Target(selector => selector.Enums());
+
+        /// <summary>
+        /// Sets the target type to all types.
+        /// </summary>
+        /// <param name="types">The type query builder target.</param>
+        /// <returns>The type query builder modifiers.</returns>
+        public static ITypeQueryBuilderCriterias TargetAllTypes(this ITypeQueryBuilderTarget types) =>
+            types.Target(selector => selector.Interfaces().Classes().Enums().Interfaces());
     }
 }

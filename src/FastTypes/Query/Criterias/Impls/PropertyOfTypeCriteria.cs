@@ -2,6 +2,9 @@
 
 namespace FastTypes.Query
 {
+    /// <summary>
+    /// Criteria to check if the type contains a property that returns a given type.
+    /// </summary>
     public sealed class PropertyOfTypeCriteria : ITypeQueryCriteria
     {
         private readonly Type _returnType;
@@ -11,6 +14,7 @@ namespace FastTypes.Query
             _returnType = returnType ?? throw new ArgumentNullException(nameof(returnType));
         }
 
+        /// <inheritdoc cref="IsMatching"/>
         public bool IsMatching(Type t)
         {
             foreach (var property in t.GetProperties())
@@ -21,6 +25,7 @@ namespace FastTypes.Query
             return false;
         }
 
+        /// <inheritdoc cref="Priority"/>
         public int Priority => QueryCriteriaPriority.Low;
     }
 }

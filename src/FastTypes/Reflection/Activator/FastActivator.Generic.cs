@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using FastTypes.Compiler;
 using FastTypes.DataStructures;
 
 namespace FastTypes.Reflection
 {
+    /// <summary>
+    /// This class provides support for instanciating a given Type.
+    /// </summary>
+    /// <typeparam name="TType">Reflected Type</typeparam>
     public sealed class FastActivator<TType> : FastActivator
     {
         internal static FastActivator<TType> Factory()
@@ -73,13 +78,17 @@ namespace FastTypes.Reflection
         /// <summary>
         /// Invokes the public empty constructor.
         /// </summary>
-        /// <returns>New instance of current Type as <see cref="TType"/></returns>
+        /// <returns>A new instance of current Type as <typeparamref name="TType"/></returns>
         public TType New()
         {
             if (_fastCtor == null) ThrowHelper.NoSuitableConstructorFound(typeof(Func<TType>));
             return _fastCtor();
         }
 
+        /// <summary>
+        /// Creates a new instance of the specified type using 1 argument constructor.
+        /// </summary>
+        /// <returns>A new instance of current Type as <typeparamref name="TType"/></returns>
         public TType New<T1>(T1 arg1)
         {
             var key = TypesHashCode.Hash<T1>();
@@ -88,6 +97,10 @@ namespace FastTypes.Reflection
             return ((Func<T1, TType>)_ctors[key])(arg1);
         }
 
+        /// <summary>
+        /// Creates a new instance of the specified type using 2 arguments constructor.
+        /// </summary>
+        /// <returns>A new instance of current Type as <typeparamref name="TType"/></returns>
         public TType New<T1, T2>(T1 arg1, T2 arg2)
         {
             var key = TypesHashCode.Hash<T1, T2>();
@@ -96,6 +109,10 @@ namespace FastTypes.Reflection
             return ((Func<T1, T2, TType>)_ctors[key])(arg1, arg2);
         }
 
+        /// <summary>
+        /// Creates a new instance of the specified type using 3 arguments constructor.
+        /// </summary>
+        /// <returns>A new instance of current Type as <typeparamref name="TType"/></returns>
         public TType New<T1, T2, T3>(T1 arg1, T2 arg2, T3 arg3)
         {
             var key = TypesHashCode.Hash<T1, T2, T3>();
@@ -104,6 +121,10 @@ namespace FastTypes.Reflection
             return ((Func<T1, T2, T3, TType>)_ctors[key])(arg1, arg2, arg3);
         }
 
+        /// <summary>
+        /// Creates a new instance of the specified type using 4 arguments constructor.
+        /// </summary>
+        /// <returns>A new instance of current Type as <typeparamref name="TType"/></returns>
         public TType New<T1, T2, T3, T4>(T1 arg1, T2 arg2, T3 arg3, T4 arg4)
         {
             var key = TypesHashCode.Hash<T1, T2, T3, T4>();
@@ -112,6 +133,10 @@ namespace FastTypes.Reflection
             return ((Func<T1, T2, T3, T4, TType>)_ctors[key])(arg1, arg2, arg3, arg4);
         }
 
+        /// <summary>
+        /// Creates a new instance of the specified type using 5 arguments constructor.
+        /// </summary>
+        /// <returns>A new instance of current Type as <typeparamref name="TType"/></returns>
         public TType New<T1, T2, T3, T4, T5>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5)
         {
             var key = TypesHashCode.Hash<T1, T2, T3, T4, T5>();

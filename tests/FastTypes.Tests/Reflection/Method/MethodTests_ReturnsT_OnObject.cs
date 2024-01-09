@@ -1,9 +1,10 @@
-﻿using FluentAssertions;
+﻿using FastTypes.Reflection;
+using FluentAssertions;
 using NSubstitute;
 
 namespace FastTypes.Tests.Reflection.Method
 {
-    [Trait(Traits.Reflection, Traits.Reflection_Method)]
+    [Trait(Traits.Reflection.Tag, Traits.Reflection.Method)]
     public class MethodTests_ReturnsT_OnObject
     {
         //DONT CHANGE, it should be invoked on object overloads
