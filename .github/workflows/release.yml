@@ -31,7 +31,7 @@ jobs:
         run: dotnet test --configuration Release --no-build
 
       - name: Pack 📦
-        run: dotnet pack --configuration Release /p:Version=${VERSION}
+        run: dotnet pack --configuration Release
 
       - name: Push ☝️
-        run: dotnet nuget push src/**/bin/Release/*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push src/FastTypes/bin/Release/*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate
