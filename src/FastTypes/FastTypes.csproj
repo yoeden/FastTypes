@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>0.0.2</Version>
+    <Version>0.2.0</Version>
     <Authors>YoEden</Authors>
     <Description>FastTypes is a fast fluent reflection library for .NET !</Description>
     <Copyright>Copyright YoEden</Copyright>
