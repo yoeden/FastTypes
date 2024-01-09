@@ -24,6 +24,21 @@ namespace FastTypes.Query
         ITypeQueryBuilderTarget FromAssemblies(params Assembly[] assemblies);
 
         /// <summary>
+        /// Specifies to scan on executing assembly (will be FastType assembly).
+        /// </summary>
+        ITypeQueryBuilderTarget FromExecutingAssembly();
+
+        /// <summary>
+        /// Specifies to scan on calling assembly.
+        /// </summary>
+        ITypeQueryBuilderTarget FromCallingAssembly();
+
+        /// <summary>
+        /// Specifies to scan on entry assembly.
+        /// </summary>
+        ITypeQueryBuilderTarget FromEntryAssembly();
+
+        /// <summary>
         /// Specifies to scan on all available assemblies.
         /// </summary>
         /// <returns>A type query builder for selecting targets.</returns>

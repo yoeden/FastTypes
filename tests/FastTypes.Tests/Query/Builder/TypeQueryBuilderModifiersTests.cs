@@ -7,7 +7,7 @@ namespace FastTypes.Tests.Query.Builder
     [Trait(Traits.Query.Tag,Traits.Query.Builder)]
     public class TypeQueryBuilderModifiersTests
     {
-        private static T GetCriteriaFromBuilder<T>(Func<ITypeQueryBuilderModifiers, ITypeQueryBuilderModifiers> func)
+        private static T GetCriteriaFromBuilder<T>(Func<ITypeQueryBuilderCriterias, ITypeQueryBuilderCriterias> func)
             where T : ITypeQueryCriteria
         {
             var builder = new TypeQueryBuilder();

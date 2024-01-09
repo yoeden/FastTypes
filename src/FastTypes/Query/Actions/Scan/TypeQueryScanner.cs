@@ -11,7 +11,7 @@ namespace FastTypes.Query
     /// <summary>
     /// Assembly scanner based on a given query snapshot.
     /// </summary>
-    public static class TypeQueryScanner
+    internal static class TypeQueryScanner
     {
         // Cache to store types per assembly
         private static readonly ConcurrentDictionary<string, Type[]> TypeCache = new();
