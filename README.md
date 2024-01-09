@@ -16,6 +16,8 @@ Documentation available at the link [here](/docs/README.md)
 
 ## Quickstart 🏃
 
+### Reflection 🔬
+
 ```csharp
 // Create a fast type
 var type = FastType.Of<Student>();
@@ -32,6 +34,21 @@ type.Property("Name").Set(student, "Scottie Pippen");
 // Call a method
 type.Method("MarkAsPassed").Invoke(student, gpaScore);
 ```
+
+### Assembly scanning (query) 🔍
+
+```csharp
+
+// Find all public classes from current assembly, that implemets `IService1` and has attribute `SerializableAttribute`.
+var services = FastType
+    .Query()
+    .FromEntryAssembly()
+    .TargetAllClasses()
+    .AssignableTo<IService1>()
+    .WithAttribute<SerializableAttribute>()
+    .FindTypes();
+```
+
 ## Benchmarks ⏱️
 
 #### New Struct
