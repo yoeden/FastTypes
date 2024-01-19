@@ -1,4 +1,6 @@
-﻿namespace FastTypes.Tests
+﻿using System.Runtime.CompilerServices;
+
+namespace FastTypes.Tests
 {
     public static class Traits
     {
@@ -45,6 +47,14 @@
             public const string UnmodifiableFastDictionaryByString = "UnmodifiableFastDictionaryByString";
             public const string LockableSet = "LockableSet";
             public const string LockableList = "LockableList";
+        }
+
+        public static class Copy
+        {
+            public const string Tag = "Copy";
+
+            public const string Object = "Object";
+            public const string Generic = "Generic";
         }
     }
 }
