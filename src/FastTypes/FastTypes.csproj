@@ -1,33 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <LangVersion>12</LangVersion>
-    <TargetFrameworks>netstandard2.1;net8.0</TargetFrameworks>
-    <!--<TargetFrameworks>net5.0;net8.0</TargetFrameworks>-->
+    <AssemblyName>FastTypes</AssemblyName>
+    <RootNamespace>FastTypes</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <TargetFrameworks>net8.0;netstandard2.1;net5.0</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
-    <VersionPrefix>4.2.2</VersionPrefix>
-    <Authors>YoEden</Authors>
+    <!-- TODO Find a way to automate this version by the current tag -->
+    <VersionPrefix>0.3.0</VersionPrefix>
+    <Authors>Eden Yashar</Authors>
     <Description>FastTypes is a fast fluent reflection library for .NET !</Description>
-    <Copyright>Copyright YoEden</Copyright>
-    <PackageId>FastTypes</PackageId>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/yoeden/FastTypes</RepositoryUrl>
-    <Features>strict</Features>
-    <SignAssembly>true</SignAssembly>
+    <PackageTags>reflection;mapping;mapper;fast;perfomance;il;codegen;query;</PackageTags>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <MinVerTagPrefix>v</MinVerTagPrefix>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+
+    <Copyright>Copyright 2024 © Eden Yashar</Copyright>
+    <Company>YoEden</Company>
+    <PackageProjectUrl>https://github.com/yoeden/FastTypes</PackageProjectUrl>
+    <PackageIcon>logo.png</PackageIcon>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- TODO Move this common values to Directory.Build.props -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+    <SignAssembly>true</SignAssembly>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <Deterministic>true</Deterministic>
+
     <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>FastTypes</Title>
-    <PackageIcon>logo.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -39,7 +46,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="logo.png" Pack="true" PackagePath="" />
+    <None Include="$(MSBuildThisFileDirectory)..\..\logo.png" Pack="true" PackagePath="\" />
+    <None Include="$(MSBuildThisFileDirectory)..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
+
 
 </Project>
