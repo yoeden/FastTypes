@@ -7,8 +7,11 @@ using FluentAssertions;
 
 namespace FastTypes.Tests.Copy.New
 {
+    [Trait(Traits.Copy.Tag, Traits.Copy.CircularDependency)]
     public class FastCopyCircularDependencyTests : BaseFastCopyTests
     {
+        [Trait(Traits.Copy.Tag, Traits.Copy.Arrays)]
+        [Trait(Traits.Copy.Tag, Traits.Copy.RefTypes)]
         [Fact]
         public void DeepCopy_OnCircularDependency_ShouldClone()
         {
@@ -25,6 +28,7 @@ namespace FastTypes.Tests.Copy.New
             copy.Nested.Should().HaveCount(source.Nested.Length);
         }
 
+        [Trait(Traits.Copy.Tag, Traits.Copy.RefTypes)]
         [Fact]
         public void DeepCopy_OnComplexCircularDependency_ShouldClone()
         {

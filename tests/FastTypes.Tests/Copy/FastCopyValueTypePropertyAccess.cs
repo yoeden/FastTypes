@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FastTypes.Tests.Copy.New;
 
 namespace FastTypes.Tests.Copy
 {
-    public partial class FastCopyTests
+    [Trait(Traits.Copy.Tag, Traits.Copy.ComplexValueType)]
+    [Trait(Traits.Copy.Tag, Traits.Copy.Access)]
+    public class FastCopyValueTypePropertyAccess : BaseFastCopyTests
     {
         //This class is testing only value types read write properties
 
@@ -16,14 +19,15 @@ namespace FastTypes.Tests.Copy
         {
             //
             var source = new ValueTypeReadWriteProperty();
-            source.Value = 23;
+            source.Value = new ClassWithPrimitiveStub(23);
 
             //
             var clone = InvokeGenericDeepCopy(source);
 
             //
             clone.Should().NotBeSameAs(source);
-            clone.Value.Should().Be(source.Value);
+            clone.Value.Should().NotBeSameAs(source.Value);
+            clone.Value.Num.Should().Be(source.Value.Num);
         }
 
         [Fact]
@@ -31,14 +35,15 @@ namespace FastTypes.Tests.Copy
         {
             //
             var source = new ValueTypeReadWriteProperty();
-            source.Value = 23;
+            source.Value = new ClassWithPrimitiveStub(23);
 
             //
-            var clone = InvokeObjectDeepCopy(source);
+            var clone = (ValueTypeReadWriteProperty)InvokeObjectDeepCopy(source);
 
             //
             clone.Should().NotBeSameAs(source);
-            clone.Value.Should().Be(source.Value);
+            clone.Value.Should().NotBeSameAs(source.Value);
+            clone.Value.Num.Should().Be(source.Value.Num);
         }
 
 
@@ -65,21 +70,20 @@ namespace FastTypes.Tests.Copy
             source.SetPrivateValue(23);
 
             //
-            var clone = InvokeObjectDeepCopy(source);
+            var clone = (ValueTypeReadWriteProperty)InvokeObjectDeepCopy(source);
 
             //
             clone.Should().NotBeSameAs(source);
             clone.GetPrivateValue().Should().Be(source.GetPrivateValue());
         }
 
-        private class ValueTypeReadWriteProperty
+        private struct ValueTypeReadWriteProperty
         {
-            public int Value { get; set; }
-            private int PValue { get; set; }
+            public ClassWithPrimitiveStub Value { get; set; }
+            private ClassWithPrimitiveStub PValue { get; set; }
 
-            public int GetPrivateValue() => PValue;
-            public void SetPrivateValue(int v) => PValue = v;
+            public int GetPrivateValue() => PValue.Num;
+            public void SetPrivateValue(int v) => PValue = new(v);
         }
-
     }
 }

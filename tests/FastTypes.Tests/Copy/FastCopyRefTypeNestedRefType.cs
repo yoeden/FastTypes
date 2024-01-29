@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FastTypes.Tests.Copy.New;
 
 namespace FastTypes.Tests.Copy
 {
-    public partial class FastCopyTests
+    [Trait(Traits.Copy.Tag, Traits.Copy.RefTypes)]
+    public class FastCopyRefTypeNestedRefType : BaseFastCopyTests
     {
         [Fact]
         public void DeepCopyT_OnObjectWithNestedObject_ShouldClone()

@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FastTypes.Tests.Copy.New;
 
 namespace FastTypes.Tests.Copy
 {
-    public partial class FastCopyTests
+    [Trait(Traits.Copy.Tag, Traits.Copy.ComplexValueType)]
+    [Trait(Traits.Copy.Tag, Traits.Copy.Access)]
+    public class FastCopyValueTypeReadonlyPropertyAccessTests : BaseFastCopyTests
     {
         //This class is testing only value types read only properties
 
@@ -22,7 +25,8 @@ namespace FastTypes.Tests.Copy
 
             //
             clone.Should().NotBeSameAs(source);
-            clone.Value.Should().Be(source.Value);
+            clone.Value.Should().NotBeSameAs(source.Value);
+            clone.Value.Num.Should().Be(source.Value.Num);
         }
 
         [Fact]
@@ -32,11 +36,12 @@ namespace FastTypes.Tests.Copy
             var source = new ValueTypeReadonlyProperty(23);
 
             //
-            var clone = InvokeObjectDeepCopy(source);
+            var clone = (ValueTypeReadonlyProperty)InvokeObjectDeepCopy(source);
 
             //
             clone.Should().NotBeSameAs(source);
-            clone.Value.Should().Be(source.Value);
+            clone.Value.Should().NotBeSameAs(source.Value);
+            clone.Value.Num.Should().Be(source.Value.Num);
         }
 
 
@@ -61,30 +66,25 @@ namespace FastTypes.Tests.Copy
             var source = new ValueTypeReadonlyProperty(23);
 
             //
-            var clone = InvokeObjectDeepCopy(source);
+            var clone = (ValueTypeReadonlyProperty)InvokeObjectDeepCopy(source);
 
             //
             clone.Should().NotBeSameAs(source);
             clone.GetPrivateValue().Should().Be(source.GetPrivateValue());
         }
 
-        private class ValueTypeReadonlyProperty
+        private readonly struct ValueTypeReadonlyProperty
         {
             public ValueTypeReadonlyProperty(int value)
             {
-                Value = value;
-                PValue = value;
+                Value = new ClassWithPrimitiveStub(value);
+                PValue = new ClassWithPrimitiveStub(value);
             }
 
-            private ValueTypeReadonlyProperty()
-            {
+            public ClassWithPrimitiveStub Value { get; }
+            private ClassWithPrimitiveStub PValue { get; }
 
-            }
-
-            public int Value { get; }
-            private int PValue { get; }
-
-            public int GetPrivateValue() => PValue;
+            public int GetPrivateValue() => PValue.Num;
         }
 
     }

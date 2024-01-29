@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using FastTypes.Clone.Metadata;
 
@@ -18,19 +19,12 @@ namespace FastTypes.Clone
             var typeFields = t.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             var typeProps = t.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
-            var ctor = (ConstructorInfo)null;
-
             //
-            for (var i = 0; i < typeCtors.Length; i++)
+            var ctors = new List<CopyTargetCtor>(typeCtors.Length);
+            foreach (var ctor in typeCtors)
             {
-                var constructorInfo = typeCtors[i];
-                if (constructorInfo.GetParameters().Length == 0)
-                {
-                    ctor = (constructorInfo);
-                    break;
-                }
+                ctors.Add(new CopyTargetCtor(ctor));
             }
-            if (ctor == null && t.IsClass) throw new InvalidOperationException("No empty constructor found.");
 
             //
             var fields = new List<CopyTargetField>(typeFields.Length);
@@ -46,37 +40,27 @@ namespace FastTypes.Clone
                 properties.Add(new CopyTargetProperty(fields, property));
             }
 
-            return new CopyTarget(t, ctor, fields, properties);
+            return new CopyTarget(t, ctors, fields, properties);
         }
 
-        public CopyTarget(
-            Type type,
-            ConstructorInfo constructor,
-            IReadOnlyList<CopyTargetField> fields,
-            IReadOnlyList<CopyTargetProperty> properties
-        )
+        public CopyTarget(Type type, IReadOnlyList<CopyTargetCtor> constructors, IReadOnlyList<CopyTargetField> fields, IReadOnlyList<CopyTargetProperty> properties)
         {
             Type = type;
-            Constructor = constructor;
+            Constructors = constructors;
             Fields = fields;
             Properties = properties;
         }
 
         public Type Type { get; }
-        public ConstructorInfo Constructor { get; }
+        public IReadOnlyList<CopyTargetCtor> Constructors { get; }
         public IReadOnlyList<CopyTargetField> Fields { get; }
         public IReadOnlyList<CopyTargetProperty> Properties { get; }
 
-        public CopyTargetField FindBackingField(PropertyInfo info)
+        public ConstructorInfo GetDefaultCtor() => Constructors.FirstOrDefault(c => c.IsDefault)?.Constructor;
+
+        public override string ToString()
         {
-            if (info.DeclaringType != Type) throw new ArgumentException(nameof(info));
-
-            foreach (var field in Fields)
-            {
-                if (field.Field.IsBackingFieldOf(info)) return field;
-            }
-
-            return null;
+            return $"{Type.Name} ({Constructors.Count} Ctors, {Fields.Count} Fields, {Properties.Count} Properties)";
         }
     }
 }

@@ -10,6 +10,7 @@ namespace FastTypes.Tests.Copy.New
 {
     public class FastCopyValueTypeTests : BaseFastCopyTests
     {
+        [Trait(Traits.Copy.Tag, Traits.Copy.PureValueType)]
         [Fact]
         public void DeepCopy_OnPureValueType_ShouldClone()
         {
@@ -23,6 +24,7 @@ namespace FastTypes.Tests.Copy.New
             source.Value.Should().Be(copy.Value);
         }
 
+        [Trait(Traits.Copy.Tag, Traits.Copy.ComplexValueType)]
         [Fact]
         public void DeepCopy_OnComplexValueType_ShouldClone()
         {
@@ -34,7 +36,7 @@ namespace FastTypes.Tests.Copy.New
 
             //
             copy.RefType.Should().NotBeSameAs(source.RefType);
-            copy.RefType.Value.Should().Be(source.RefType.Value);
+            copy.RefType.Num.Should().Be(source.RefType.Num);
         }
 
 

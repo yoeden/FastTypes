@@ -16,7 +16,19 @@ namespace FastTypes.Clone.Metadata
         public override bool CanWrite => true;
         public bool IsBackingField { get; }
 
-        private static bool IsFieldInfoBackingField(FieldInfo info) =>
+        public bool IsBackingFieldOf(PropertyInfo prop)
+        {
+            if (!IsBackingField) return false;
+
+            return $"<{prop.Name}>k__BackingField".Equals(Field.Name);
+        }
+
+        public override string ToString()
+        {
+            return $"{(CanWrite ? "w" : "")}{(CanRead ? "r" : "")} {Field}";
+        }
+
+        private static bool IsFieldInfoBackingField(MemberInfo info) =>
             info.Name.EndsWith("k__BackingField") &&
             info.GetCustomAttribute<CompilerGeneratedAttribute>() != null;
     }

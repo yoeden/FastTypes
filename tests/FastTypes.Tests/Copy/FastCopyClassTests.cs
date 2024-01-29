@@ -7,6 +7,7 @@ using FluentAssertions;
 
 namespace FastTypes.Tests.Copy.New
 {
+    [Trait(Traits.Copy.Tag, Traits.Copy.RefTypes)]
     public class FastCopyClassTests : BaseFastCopyTests
     {
         [Theory]
@@ -22,7 +23,7 @@ namespace FastTypes.Tests.Copy.New
 
             //
             copy.Should().NotBeSameAs(source);
-            copy.Value.Should().Be(source.Value);
+            copy.Num.Should().Be(source.Num);
         }
 
         [Theory]
@@ -55,7 +56,7 @@ namespace FastTypes.Tests.Copy.New
             //
             copy.Should().NotBeSameAs(source);
             copy.ComplexValueType.RefType.Should().NotBeSameAs(source.ComplexValueType.RefType);
-            copy.ComplexValueType.RefType.Value.Should().Be(source.ComplexValueType.RefType.Value);
+            copy.ComplexValueType.RefType.Num.Should().Be(source.ComplexValueType.RefType.Num);
         }
 
         [Theory]

@@ -7,6 +7,21 @@ namespace FastTypes.Clone.Metadata
 {
     internal static class TypeExt
     {
+        public static bool IsPureType<T>(this T value)
+        {
+            //Order by most used to least used
+            if (value is null) return false;
+            if (value is string) return true;
+            if (value is int) return true;
+            if (value is long) return true;
+            if (value is DateTime) return true;
+            if (value is Guid) return true;
+            if (value is decimal) return true;
+            //TODO: Add more
+
+            return value.GetType().IsPureType();
+        }
+
         public static bool IsPureType(this Type t)
         {
             if (t == typeof(string)) return true;

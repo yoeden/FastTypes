@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FastTypes.Tests.Copy.New;
 
 namespace FastTypes.Tests.Copy
 {
-    public partial class FastCopyTests
+    [Trait(Traits.Copy.Tag, Traits.Copy.RefTypes)]
+    [Trait(Traits.Copy.Tag, Traits.Copy.Access)]
+    public class FastCopyRefTypeReadonlyPropertyAccessTests : BaseFastCopyTests
     {
         //This class is testing only value types read write properties
 
@@ -23,7 +26,7 @@ namespace FastTypes.Tests.Copy
             //
             clone.Should().NotBeSameAs(source);
             clone.Value.Should().NotBeSameAs(source.Value);
-            clone.Value.Number.Should().Be(source.Value.Number);
+            clone.Value.Num.Should().Be(source.Value.Num);
         }
 
         [Fact]
@@ -33,12 +36,12 @@ namespace FastTypes.Tests.Copy
             var source = new RefTypeReadonlyProperty(23);
 
             //
-            var clone = InvokeObjectDeepCopy(source);
+            var clone = (RefTypeReadonlyProperty)InvokeObjectDeepCopy(source);
 
             //
             clone.Should().NotBeSameAs(source);
             clone.Value.Should().NotBeSameAs(source.Value);
-            clone.Value.Number.Should().Be(source.Value.Number);
+            clone.Value.Num.Should().Be(source.Value.Num);
         }
 
 
@@ -54,7 +57,7 @@ namespace FastTypes.Tests.Copy
             //
             clone.Should().NotBeSameAs(source);
             clone.GetPrivateValue().Should().NotBeSameAs(source.GetPrivateValue());
-            clone.GetPrivateValue().Number.Should().Be(source.GetPrivateValue().Number);
+            clone.GetPrivateValue().Num.Should().Be(source.GetPrivateValue().Num);
         }
 
         [Fact]
@@ -64,20 +67,20 @@ namespace FastTypes.Tests.Copy
             var source = new RefTypeReadonlyProperty(23);
 
             //
-            var clone = InvokeObjectDeepCopy(source);
+            var clone = (RefTypeReadonlyProperty)InvokeObjectDeepCopy(source);
 
             //
             clone.Should().NotBeSameAs(source);
             clone.GetPrivateValue().Should().NotBeSameAs(source.GetPrivateValue());
-            clone.GetPrivateValue().Number.Should().Be(source.GetPrivateValue().Number);
+            clone.GetPrivateValue().Num.Should().Be(source.GetPrivateValue().Num);
         }
 
         private class RefTypeReadonlyProperty
         {
             public RefTypeReadonlyProperty(int v)
             {
-                Value = new StubRefType() { Number = v };
-                PValue = new StubRefType() { Number = v };
+                Value = new ClassWithPrimitiveStub(v) ;
+                PValue = new ClassWithPrimitiveStub(v) ;
             }
 
             private RefTypeReadonlyProperty()
@@ -86,10 +89,10 @@ namespace FastTypes.Tests.Copy
             }
 
             // ReSharper disable once MemberCanBePrivate.Local
-            public StubRefType Value { get; }
-            private StubRefType PValue { get; }
+            public ClassWithPrimitiveStub Value { get; }
+            private ClassWithPrimitiveStub PValue { get; }
 
-            public StubRefType GetPrivateValue() => PValue;
+            public ClassWithPrimitiveStub GetPrivateValue() => PValue;
         }
 
 

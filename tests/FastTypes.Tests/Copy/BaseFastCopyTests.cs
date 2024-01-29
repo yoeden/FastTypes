@@ -6,17 +6,20 @@ namespace FastTypes.Tests.Copy.New
     {
         protected T InvokeDeepCopy<T>(T src, bool useGeneric = true)
         {
-            return useGeneric ? FastCopy.DeepCopy(src) : (T)FastCopy.DeepCopy((object)src);
+            return useGeneric ? InvokeGenericDeepCopy(src) : (T)InvokeObjectDeepCopy(src);
         }
+
+        protected T InvokeGenericDeepCopy<T>(T src) => FastType.DeepCopy(src);
+        protected object InvokeObjectDeepCopy(object src) => FastType.DeepCopy(src);
 
         protected class ClassWithPrimitiveStub
         {
             //TODO: Replace all of this with Create method
-            public ClassWithPrimitiveStub(int v) => Value = v;
+            public ClassWithPrimitiveStub(int v) => Num = v;
 
             private ClassWithPrimitiveStub() { }
 
-            public int Value { get; set; }
+            public int Num { get; set; }
         }
 
         protected class ClassWithInternalClassStub
@@ -30,6 +33,36 @@ namespace FastTypes.Tests.Copy.New
             }
 
             public ClassWithPrimitiveStub Internal { get; set; }
+
+            protected bool Equals(ClassWithInternalClassStub other)
+            {
+                return Equals(Internal, other.Internal);
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj))
+                {
+                    return false;
+                }
+
+                if (ReferenceEquals(this, obj))
+                {
+                    return true;
+                }
+
+                if (obj.GetType() != GetType())
+                {
+                    return false;
+                }
+
+                return Equals((ClassWithInternalClassStub)obj);
+            }
+
+            public override int GetHashCode()
+            {
+                return (Internal != null ? Internal.GetHashCode() : 0);
+            }
         }
 
         protected class ClassWithPureValueTypeStub
