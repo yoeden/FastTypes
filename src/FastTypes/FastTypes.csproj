@@ -9,22 +9,31 @@
 
   <PropertyGroup>
     <!-- TODO Find a way to automate this version by the current tag -->
+    <!-- Free text properties -->
     <VersionPrefix>0.3.0</VersionPrefix>
-    <Authors>Eden Yashar</Authors>
+    <Authors>YoEden</Authors>
     <Description>FastTypes is a fast fluent reflection library for .NET !</Description>
-    <PackageTags>reflection;mapping;mapper;fast;perfomance;il;codegen;query;</PackageTags>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-
+    <Summary>FastTypes is a fast fluent reflection library for .NET !</Summary>
+    <Title>Fast Types</Title>
     <Copyright>Copyright 2024 © Eden Yashar</Copyright>
     <Company>YoEden</Company>
-    <PackageProjectUrl>https://github.com/yoeden/FastTypes</PackageProjectUrl>
+
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Metadata Properties -->
     <PackageIcon>logo.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/yoeden/FastTypes</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/yoeden/FastTypes</PackageProjectUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageTags>reflection;fast;perfomance;il;codegen;query;clone;deepcopy;deep;copy</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup>
     <!-- TODO Move this common values to Directory.Build.props -->
+    <!-- Compiling Properties -->
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <AnalysisLevel>latest</AnalysisLevel>
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
@@ -39,6 +48,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+
+  <ItemGroup>
     <PackageReference Include="IsExternalInit" Version="1.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -46,10 +67,6 @@
     <InternalsVisibleTo Include="FastTypes.Tests" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)..\..\logo.png" Pack="true" PackagePath="\" />
-    <None Include="$(MSBuildThisFileDirectory)..\..\README.md" Pack="true" PackagePath="\" />
-  </ItemGroup>
 
 
 </Project>
