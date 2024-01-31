@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <LangVersion>latest</LangVersion>
+    <TargetFrameworks>net8.0;net6.0;net5.0;netcoreapp3.1</TargetFrameworks>
+
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\FastTypes\FastTypes.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Cloning -->
+    <PackageReference Include="AnyClone" Version="1.1.6" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.11" />
+    <PackageReference Include="DeepCloner" Version="0.10.4" />
+    <PackageReference Include="DeepCopy" Version="1.0.3" />
+    <PackageReference Include="Mono.Reflection" Version="2.0.0" />
+    <PackageReference Include="ObjectCloner" Version="2.2.2" />
+    <PackageReference Include="ShereSoft.DeepCloning" Version="1.1.1" />
+  </ItemGroup>
+
+</Project>

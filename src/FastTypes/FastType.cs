@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FastTypes.Clone;
 using FastTypes.Query;
 using FastTypes.Reflection;
 
@@ -119,5 +120,19 @@ namespace FastTypes
         {
             return new TypeQueryBuilder();
         }
+
+        /// <summary>
+        /// Creates a deep copy of the state of the given object (fields and properties).
+        /// </summary>
+        /// <param name="src">The object to clone</param>
+        /// <returns>A deep cloned copy of the given object</returns>
+        public static T DeepCopy<T>(T src) => FastCopy.DeepCopy(src);
+
+        /// <summary>
+        /// Creates a deep copy of the state of the given object (fields and properties).
+        /// </summary>
+        /// <param name="src">The object to clone</param>
+        /// <returns>A deep cloned copy of the given object</returns>
+        public static object DeepCopy(object src) => FastCopy.DeepCopy(src);
     }
 }
