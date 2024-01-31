@@ -1,34 +1,63 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <LangVersion>12</LangVersion>
-    <TargetFrameworks>netstandard2.1;net8.0</TargetFrameworks>
-    <!--<TargetFrameworks>net5.0;net8.0</TargetFrameworks>-->
+    <AssemblyName>FastTypes</AssemblyName>
+    <RootNamespace>FastTypes</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <TargetFrameworks>net8.0;netstandard2.1;net5.0</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
-    <VersionPrefix>4.2.2</VersionPrefix>
+    <!-- TODO Find a way to automate this version by the current tag -->
+    <!-- Free text properties -->
+    <VersionPrefix>0.3.0</VersionPrefix>
     <Authors>YoEden</Authors>
     <Description>FastTypes is a fast fluent reflection library for .NET !</Description>
-    <Copyright>Copyright YoEden</Copyright>
-    <PackageId>FastTypes</PackageId>
-    <RepositoryType>git</RepositoryType>
+    <Summary>FastTypes is a fast fluent reflection library for .NET !</Summary>
+    <Title>Fast Types</Title>
+    <Copyright>Copyright 2024 © Eden Yashar</Copyright>
+    <Company>YoEden</Company>
+
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Metadata Properties -->
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/yoeden/FastTypes</RepositoryUrl>
-    <Features>strict</Features>
-    <SignAssembly>true</SignAssembly>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <MinVerTagPrefix>v</MinVerTagPrefix>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/yoeden/FastTypes</PackageProjectUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageTags>reflection;fast;perfomance;il;codegen;query;clone;deepcopy;deep;copy</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- TODO Move this common values to Directory.Build.props -->
+    <!-- Compiling Properties -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+    <SignAssembly>true</SignAssembly>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <Deterministic>true</Deterministic>
+
     <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>FastTypes</Title>
-    <PackageIcon>logo.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="IsExternalInit" Version="1.0.3">
@@ -39,8 +68,6 @@
     <InternalsVisibleTo Include="FastTypes.Tests" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="logo.png" Pack="true" PackagePath="" />
-  </ItemGroup>
+
 
 </Project>
