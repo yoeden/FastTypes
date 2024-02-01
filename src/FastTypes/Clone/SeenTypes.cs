@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FastTypes.Clone.AnotherTake
+namespace FastTypes.Clone
 {
     internal sealed class SeenTypes
     {

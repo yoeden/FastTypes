@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FastTypes.Clone;
 using FluentAssertions;
 
 namespace FastTypes.Tests.Copy.New

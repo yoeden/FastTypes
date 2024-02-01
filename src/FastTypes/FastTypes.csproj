@@ -4,7 +4,7 @@
     <AssemblyName>FastTypes</AssemblyName>
     <RootNamespace>FastTypes</RootNamespace>
     <LangVersion>latest</LangVersion>
-    <TargetFrameworks>net8.0;netstandard2.1;net5.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;netstandard2.1</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -67,7 +67,5 @@
     <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
     <InternalsVisibleTo Include="FastTypes.Tests" />
   </ItemGroup>
-
-
 
 </Project>

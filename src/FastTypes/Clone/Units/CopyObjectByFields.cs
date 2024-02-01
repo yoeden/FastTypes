@@ -1,9 +1,8 @@
 using System;
 using System.Reflection.Emit;
-using FastTypes.Clone.Units;
 using FastTypes.Compiler;
 
-namespace FastTypes.Clone.AnotherTake
+namespace FastTypes.Clone
 {
     internal sealed class CopyObjectByFields : DeepCopyAction
     {
@@ -100,7 +99,7 @@ namespace FastTypes.Clone.AnotherTake
             }
             else
             {
-                if (target.GetDefaultCtor() == null) throw new NotImplementedException("No default constructor found, unable to create object");
+                if (target.GetDefaultCtor() == null) ThrowHelper.NoSuitableConstructorFound(target.Type);
 
                 // Object
                 il.Nop($"{dst.LocalIndex} = new {target.Type.Name}()");
@@ -109,5 +108,4 @@ namespace FastTypes.Clone.AnotherTake
             }
         }
     }
-
 }

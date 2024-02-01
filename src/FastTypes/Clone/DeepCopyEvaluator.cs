@@ -1,9 +1,7 @@
 ﻿using System;
-using FastTypes.Clone.Metadata;
-using FastTypes.Clone.Units;
 using FastTypes.Compiler;
 
-namespace FastTypes.Clone.AnotherTake
+namespace FastTypes.Clone
 {
     internal sealed class DeepCopyEvaluator : IDeepCopyEvaluator
     {

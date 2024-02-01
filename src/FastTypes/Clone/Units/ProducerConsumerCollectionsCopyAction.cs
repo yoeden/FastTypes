@@ -3,10 +3,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using FastTypes.Clone.AnotherTake;
 using FastTypes.Compiler;
 
-namespace FastTypes.Clone.Units
+namespace FastTypes.Clone
 {
     internal sealed class ProducerConsumerCollectionsCopyAction : DeepCopyAction
     {
@@ -28,7 +27,7 @@ namespace FastTypes.Clone.Units
             var elementType = collectionInterface.GetGenericArguments()[0];
 
             var ctor = GetBestFittingConstructor(target, elementType);
-            if (ctor == null) throw new NotImplementedException();
+            if (ctor == null) ThrowHelper.ProducerConsumerConstructor(type);
 
             //Source is on top of stack
             il.New(ctor);

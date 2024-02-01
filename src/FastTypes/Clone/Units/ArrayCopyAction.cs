@@ -1,8 +1,7 @@
 using System;
-using FastTypes.Clone.Metadata;
 using FastTypes.Compiler;
 
-namespace FastTypes.Clone.AnotherTake
+namespace FastTypes.Clone
 {
     internal sealed class ArrayCopyAction : DeepCopyAction
     {

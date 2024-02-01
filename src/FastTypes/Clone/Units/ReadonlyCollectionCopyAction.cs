@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
-using System.Text;
-using FastTypes.Clone.AnotherTake;
-using FastTypes.Clone.Metadata;
 using FastTypes.Compiler;
 
-namespace FastTypes.Clone.Units
+namespace FastTypes.Clone
 {
     internal sealed class ReadonlyCollectionCopyAction : DeepCopyAction
     {

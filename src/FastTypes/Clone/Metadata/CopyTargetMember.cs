@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Net;
 using System.Reflection;
-using System.Text;
 
-namespace FastTypes.Clone.Metadata
+namespace FastTypes.Clone
 {
     internal static class TypeExt
     {

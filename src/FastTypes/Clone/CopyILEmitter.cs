@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Reflection.Emit;
-using System.Text;
 using FastTypes.Compiler;
 
-namespace FastTypes.Clone.AnotherTake
+namespace FastTypes.Clone
 {
     internal static class CopyILEmitter
     {

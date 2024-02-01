@@ -1,7 +1,7 @@
 ﻿using System;
 using FastTypes.Compiler;
 
-namespace FastTypes.Clone.AnotherTake
+namespace FastTypes.Clone
 {
     internal interface IDeepCopyEvaluator
     {

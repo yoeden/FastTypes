@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace FastTypes.Clone.Metadata
+namespace FastTypes.Clone
 {
     internal sealed class CopyTargetField : CopyTargetMember
     {

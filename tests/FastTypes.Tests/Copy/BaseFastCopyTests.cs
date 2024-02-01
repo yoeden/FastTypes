@@ -1,6 +1,4 @@
-﻿using FastTypes.Clone;
-
-namespace FastTypes.Tests.Copy.New
+﻿namespace FastTypes.Tests.Copy.New
 {
     public abstract class BaseFastCopyTests
     {
