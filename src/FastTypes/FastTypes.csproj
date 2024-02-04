@@ -74,7 +74,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Reflection\Fields\" />
     <Folder Include="Reflection\Methods\Func\" />
     <Folder Include="Reflection\Methods\Action\" />
   </ItemGroup>

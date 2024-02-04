@@ -10,6 +10,10 @@ namespace FastTypes.Reflection
     {
         private readonly FastActivator<TType> _activator;
         private readonly UnmodifiableFastDictionaryByName<FastProperty<TType>> _props;
+
+        private readonly UnmodifiableFastDictionaryByName<BaseFastField> _fieldsAsObjects;
+        private readonly UnmodifiableFastDictionaryByName<BaseFastField> _fields;
+
         private readonly UnmodifiableFastDictionaryByName<BaseFastMethod> _voidMethods;
         private readonly UnmodifiableFastDictionaryByName<BaseFastMethod> _returnMethods;
 
@@ -23,6 +27,9 @@ namespace FastTypes.Reflection
 
             //
             (_voidMethods, _returnMethods) = PrepareMethods(type);
+
+            //
+            (_fieldsAsObjects, _fields) = PrepareFields(type);
 
             //
             _activator = FastActivator<TType>.Factory();
@@ -71,24 +78,54 @@ namespace FastTypes.Reflection
             return UnmodifiableFastDictionaryByName<FastProperty<TType>>.Create(fastProps);
         }
 
+        private static (UnmodifiableFastDictionaryByName<BaseFastField> fieldsAsObjects, UnmodifiableFastDictionaryByName<BaseFastField> fields) PrepareFields(Type type)
+        {
+            var fields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance);
+            var fastFieldsAsObjects = new KeyValuePair<string, BaseFastField>[fields.Length];
+            var fastFields = new KeyValuePair<string, BaseFastField>[fields.Length];
+            for (int i = 0; i < fields.Length; i++)
+            {
+                var field = fields[i];
+                fastFields[i] = new KeyValuePair<string, BaseFastField>(fields[i].Name, FastFieldFactory.WithReturnType<TType>(field));
+                fastFieldsAsObjects[i] = new KeyValuePair<string, BaseFastField>(fields[i].Name, FastFieldFactory.WithObjectType<TType>(field));
+            }
+
+            return (UnmodifiableFastDictionaryByName<BaseFastField>.Create(fastFieldsAsObjects), UnmodifiableFastDictionaryByName<BaseFastField>.Create(fastFields));
+        }
+
         public Type Type => typeof(TType);
 
         public IEnumerable<FastProperty<TType>> Properties() => _props.Values;
 
         public FastMethod<TType> Method(string name)
         {
-            if(!_voidMethods.ContainsKey(name)) ThrowHelper.MethodDoesntExists(Type, name);
+            if (!_voidMethods.ContainsKey(name)) ThrowHelper.MethodDoesntExists(Type, name);
             return (FastMethod<TType>)_voidMethods[name];
         }
 
         public FastMethod<TType, TResult> Method<TResult>(string name)
         {
-            if(!_returnMethods.ContainsKey(name)) ThrowHelper.MethodDoesntExists(Type, name);
+            if (!_returnMethods.ContainsKey(name)) ThrowHelper.MethodDoesntExists(Type, name);
 
             var method = _returnMethods[name];
             if (method.ReturnType != typeof(TResult)) ThrowHelper.UnexpectedReturnType(name, typeof(TResult), method.ReturnType);
 
             return (FastMethod<TType, TResult>)method;
+        }
+
+        public FastField<TType> Field(string name)
+        {
+            if (!_fieldsAsObjects.ContainsKey(name)) ThrowHelper.FieldNotFound(name);
+
+            return (FastField<TType>)_fieldsAsObjects[name];
+        }
+
+        public FastField<TType, TValue> Field<TValue>(string name)
+        {
+            if (!_fields.ContainsKey(name)) ThrowHelper.FieldNotFound(name);
+
+
+            return (FastField<TType, TValue>)_fields[name];
         }
 
         public FastActivator<TType> Activator() => _activator;
@@ -104,6 +141,10 @@ namespace FastTypes.Reflection
         FastMethod IFastType.Method(string name) => Method(name);
 
         FastMethodWithResult<TResult> IFastType.Method<TResult>(string name) => Method<TResult>(name);
+
+        FastField IFastType.Field(string name) => Field(name);
+
+        FastFieldKnownValue<TValue> IFastType.Field<TValue>(string name) => Field<TValue>(name);
 
         FastActivator IFastType.Activator() => Activator();
     }

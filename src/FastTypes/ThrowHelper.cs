@@ -9,6 +9,8 @@ namespace FastTypes
     {
         public static void UnexpectedPropertyType<TType>(Type type, FastProperty<TType> fastProperty) => throw new UnexpectedMemberType(type, fastProperty.PropertyType);
 
+        public static void UnexpectedFieldType(Type expectedType, Type givenType, string name) => throw new UnexpectedFieldTypeException(expectedType, givenType, name);
+
         public static void NoSetterFound<TType>(FastProperty<TType> fastProperty) => throw new NoSetterFoundException(fastProperty.Name);
 
         public static void NoGetterFound<TType>(FastProperty<TType> fastProperty) => throw new NoGetterFoundException(fastProperty.Name);
@@ -28,5 +30,10 @@ namespace FastTypes
         public static void ProducerConsumerConstructor(Type t) => throw new ProducerConsumerConstructorException(t);
 
         public static void MethodDoesntExists(Type owner, string name) => throw new MethodDoesntExistsException(owner, name);
+
+        public static void FieldNotFound(string name)
+        {
+            throw new FieldNotFoundException(name);
+        }
     }
 }

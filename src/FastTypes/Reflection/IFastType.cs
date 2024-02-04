@@ -45,6 +45,10 @@ namespace FastTypes.Reflection
         /// <returns></returns>
         FastMethodWithResult<TResult> Method<TResult>(string name);
 
+        FastField Field(string name);
+
+        FastFieldKnownValue<TValue> Field<TValue>(string name);
+
         /// <summary>
         /// Gets the FastActivator for creating instances of this IFastType.
         /// </summary>
@@ -84,6 +88,10 @@ namespace FastTypes.Reflection
         /// <param name="name">The method name.</param>
         /// <returns>The FastMethod.</returns>
         new FastMethod<TType, TResult> Method<TResult>(string name);
+
+        new FastField<TType> Field(string name);
+
+        new FastField<TType, TValue> Field<TValue>(string name);
 
         /// <summary>
         /// Gets the FastActivator for creating instances of this IFastType.

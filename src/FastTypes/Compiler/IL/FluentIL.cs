@@ -393,6 +393,15 @@ namespace FastTypes.Compiler
             return this;
         }
 
+        public FluentIL UnBoxAny(Type t)
+        {
+            if (!t.IsValueType) throw new NotImplementedException("Cant box a non value type.");
+
+            _il.Emit(OpCodes.Unbox_Any, t);
+            Emitted(OpCodes.Unbox_Any, t);
+            return this;
+        }
+
         //
         // Fields
         //

@@ -9,6 +9,13 @@ namespace FastTypes.Compiler
 {
     internal static class FluentILExt
     {
+        public static FluentIL LoadInstanceIfNeeded(this FluentIL il, FieldInfo field, int index)
+        {
+            if (field.IsStatic) return il;
+
+            return il.LoadArgument(index);
+        }
+
         public static FluentIL BoxIfNeeded(this FluentIL il, Type t)
         {
             if (t.IsValueType) il.Box(t);
@@ -16,7 +23,14 @@ namespace FastTypes.Compiler
             return il;
         }
 
-        public static FluentIL LoadArguments(this FluentIL il, MethodInfo info)
+        public static FluentIL UnBoxIfNeeded(this FluentIL il, Type t)
+        {
+            if (t.IsValueType) il.UnBoxAny(t);
+
+            return il;
+        }
+
+        public static FluentIL LoadAllArguments(this FluentIL il, MethodInfo info)
         {
             var n = info.GetParameters().Length;
             for (int i = 0; i < n; i++)

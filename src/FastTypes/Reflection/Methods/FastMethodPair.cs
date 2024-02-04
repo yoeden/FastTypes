@@ -15,7 +15,7 @@ namespace FastTypes.Reflection
                 .WithParameters(target.GetParameters())
                 .WithThisPointer(target.DeclaringType)
                 .WithBody((il, info) => il
-                    .LoadArguments(info)
+                    .LoadAllArguments(info)
                     .Call(target)
                     .Return())
                 .Compile();
@@ -35,7 +35,7 @@ namespace FastTypes.Reflection
                 .WithParameters(target.GetParameters())
                 .WithThisPointer(target.DeclaringType)
                 .WithBody((il, info) => il
-                    .LoadArguments(info)
+                    .LoadAllArguments(info)
                     .Call(target)
                     .BoxIfNeeded(target.ReturnType)
                     .Return())
@@ -52,7 +52,7 @@ namespace FastTypes.Reflection
                 .WithParameters(target.GetParameters())
                 .WithThisPointer(target.DeclaringType)
                 .WithBody((il, info) => il
-                    .LoadArguments(info)
+                    .LoadAllArguments(info)
                     .Call(target)
                     .LoadNull()
                     .Return())
