@@ -110,8 +110,26 @@ namespace FastTypes.Compiler
 
         public FluentIL LoadArgument(int index)
         {
-            //TODO: Check if it is faster the use ldarg.0 than ldarg.i
-            _il.Emit(OpCodes.Ldarg, index);
+            switch (index)
+            {
+                case 0:
+                    _il.Emit(OpCodes.Ldarg_0);
+                    break;
+                case 1:
+                    _il.Emit(OpCodes.Ldarg_1);
+                    break;
+                case 2:
+                    _il.Emit(OpCodes.Ldarg_2);
+                    break;
+                case 3:
+                    _il.Emit(OpCodes.Ldarg_3);
+                    break;
+                default:
+                    //TODO: Check if it is faster the use ldarg_s than ldarg
+                    _il.Emit(OpCodes.Ldarg, index);
+                    break;
+            }
+
             Emitted(OpCodes.Ldarg, index);
 
             return this;

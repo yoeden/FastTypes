@@ -2,6 +2,8 @@
 
 namespace FastTypes.Reflection
 {
+    //TODO: Get rid of this, benchmark a way to make this faster
+    //If no way is found, compile a code of chained if-else (if T1 if T2 if T3 return true)
     internal static class TypesHashCode
     {
         public static int Hash<T>() => typeof(ValueTuple<T>).GetHashCode();

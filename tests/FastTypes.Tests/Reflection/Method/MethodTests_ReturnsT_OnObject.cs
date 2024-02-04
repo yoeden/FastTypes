@@ -16,7 +16,7 @@ namespace FastTypes.Tests.Reflection.Method
             _fastType = FastType.Of<MethodsClass>();
             _instance = Substitute.For<MethodsClass>();
 
-            _instance.ReturnNoArguments().Returns(ExpectedValues.Int);
+            _instance.ReturnNoArg().Returns(ExpectedValues.Int);
             _instance.Return1Arg(Arg.Any<int>()).Returns(ExpectedValues.Int);
             _instance.Return2Arg(Arg.Any<int>(), Arg.Any<int>()).Returns(ExpectedValues.Int);
             _instance.Return3Arg(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(ExpectedValues.Int);
@@ -25,13 +25,13 @@ namespace FastTypes.Tests.Reflection.Method
         }
 
         [Theory]
-        [InlineData(0, nameof(MethodsClass.ReturnNoArguments))]
+        [InlineData(0, nameof(MethodsClass.ReturnNoArg))]
         [InlineData(1, nameof(MethodsClass.Return1Arg))]
         [InlineData(2, nameof(MethodsClass.Return2Arg))]
         [InlineData(3, nameof(MethodsClass.Return3Arg))]
         [InlineData(4, nameof(MethodsClass.Return4Arg))]
         [InlineData(5, nameof(MethodsClass.Return5Arg))]
-        public void Invoke_OnValidArguments_ShouldReturn(int argsCount, string name)
+        public void Invoke_OnValidParameters_ShouldReturn(int argsCount, string name)
         {
             //
             var args = new Args();
@@ -43,27 +43,27 @@ namespace FastTypes.Tests.Reflection.Method
             switch (argsCount)
             {
                 case 0:
-                    givenResult = method.InvokeWithResult<int>(_instance);
+                    givenResult = method.Invoke(_instance);
                     expectedArgs = new object[] { };
                     break;
                 case 1:
-                    givenResult = method.InvokeWithResult<int, int>(_instance, args.Arg1);
+                    givenResult = method.Invoke<int>(_instance, args.Arg1);
                     expectedArgs = new object[] { args.Arg1 };
                     break;
                 case 2:
-                    givenResult = method.InvokeWithResult<int, int, int>(_instance, args.Arg1, args.Arg2);
+                    givenResult = method.Invoke<int, int>(_instance, args.Arg1, args.Arg2);
                     expectedArgs = new object[] { args.Arg1, args.Arg2 };
                     break;
                 case 3:
-                    givenResult = method.InvokeWithResult<int, int, int, int>(_instance, args.Arg1, args.Arg2, args.Arg3);
+                    givenResult = method.Invoke<int, int, int>(_instance, args.Arg1, args.Arg2, args.Arg3);
                     expectedArgs = new object[] { args.Arg1, args.Arg2, args.Arg3 };
                     break;
                 case 4:
-                    givenResult = method.InvokeWithResult<int, int, int, int, int>(_instance, args.Arg1, args.Arg2, args.Arg3, args.Arg4);
+                    givenResult = method.Invoke<int, int, int, int>(_instance, args.Arg1, args.Arg2, args.Arg3, args.Arg4);
                     expectedArgs = new object[] { args.Arg1, args.Arg2, args.Arg3, args.Arg4 };
                     break;
                 case 5:
-                    givenResult = method.InvokeWithResult<int, int, int, int, int, int>(_instance, args.Arg1, args.Arg2, args.Arg3, args.Arg4, args.Arg5);
+                    givenResult = method.Invoke<int, int, int, int, int>(_instance, args.Arg1, args.Arg2, args.Arg3, args.Arg4, args.Arg5);
                     expectedArgs = new object[] { args.Arg1, args.Arg2, args.Arg3, args.Arg4, args.Arg5 };
                     break;
             }
@@ -81,7 +81,7 @@ namespace FastTypes.Tests.Reflection.Method
         }
 
         [Theory]
-        [InlineData(0, nameof(MethodsClass.ReturnNoArguments))]
+        [InlineData(0, nameof(MethodsClass.ReturnNoArg))]
         [InlineData(1, nameof(MethodsClass.Return1Arg))]
         [InlineData(2, nameof(MethodsClass.Return2Arg))]
         [InlineData(3, nameof(MethodsClass.Return3Arg))]
@@ -98,22 +98,22 @@ namespace FastTypes.Tests.Reflection.Method
             switch (argsCount)
             {
                 case 0:
-                    action = () => method.InvokeWithResult<int>(null);
+                    action = () => method.Invoke(null);
                     break;
                 case 1:
-                    action = () => method.InvokeWithResult<int, int>(null, args.Arg1);
+                    action = () => method.Invoke<int>(null, args.Arg1);
                     break;
                 case 2:
-                    action = () => method.InvokeWithResult<int, int, int>(null, args.Arg1, args.Arg2);
+                    action = () => method.Invoke<int, int>(null, args.Arg1, args.Arg2);
                     break;
                 case 3:
-                    action = () => method.InvokeWithResult<int, int, int, int>(null, args.Arg1, args.Arg2, args.Arg3);
+                    action = () => method.Invoke<int, int, int>(null, args.Arg1, args.Arg2, args.Arg3);
                     break;
                 case 4:
-                    action = () => method.InvokeWithResult<int, int, int, int, int>(null, args.Arg1, args.Arg2, args.Arg3, args.Arg4);
+                    action = () => method.Invoke<int, int, int, int>(null, args.Arg1, args.Arg2, args.Arg3, args.Arg4);
                     break;
                 case 5:
-                    action = () => method.InvokeWithResult<int, int, int, int, int, int>(null, args.Arg1, args.Arg2, args.Arg3, args.Arg4, args.Arg5);
+                    action = () => method.Invoke<int, int, int, int, int>(null, args.Arg1, args.Arg2, args.Arg3, args.Arg4, args.Arg5);
                     break;
             }
 
@@ -122,44 +122,44 @@ namespace FastTypes.Tests.Reflection.Method
         }
 
         [Theory]
-        [InlineData(0, nameof(MethodsClass.NoReturnNoArguments))]
-        [InlineData(1, nameof(MethodsClass.NoReturn1Arg))]
-        [InlineData(2, nameof(MethodsClass.NoReturn2Arg))]
-        [InlineData(3, nameof(MethodsClass.NoReturn3Arg))]
-        [InlineData(4, nameof(MethodsClass.NoReturn4Arg))]
-        [InlineData(5, nameof(MethodsClass.NoReturn5Arg))]
-        public void Invoke_OnInvalidSignature_ShouldThrow(int argsCount, string name)
+        [InlineData(0, nameof(MethodsClass.ReturnNoArg))]
+        [InlineData(1, nameof(MethodsClass.Return1Arg))]
+        [InlineData(2, nameof(MethodsClass.Return2Arg))]
+        [InlineData(3, nameof(MethodsClass.Return3Arg))]
+        [InlineData(4, nameof(MethodsClass.Return4Arg))]
+        [InlineData(5, nameof(MethodsClass.Return5Arg))]
+        public void Invoke_OnInvalidParameters_ShouldThrow(int argsCount, string name)
         {
             //
             var args = new Args();
             var action = static () => { };
-            var method = _fastType.Method(name);
+            var method = _fastType.Method<int>(name);
 
             //
             switch (argsCount)
             {
                 case 0:
-                    action = () => method.InvokeWithResult<int>(_instance);
+                    action = () => method.Invoke(_instance, string.Empty);
                     break;
                 case 1:
-                    action = () => method.InvokeWithResult<int, int>(_instance, args.Arg1);
+                    action = () => method.Invoke(_instance, string.Empty);
                     break;
                 case 2:
-                    action = () => method.InvokeWithResult<int, int, int>(_instance, args.Arg1, args.Arg2);
+                    action = () => method.Invoke(_instance, string.Empty, string.Empty);
                     break;
                 case 3:
-                    action = () => method.InvokeWithResult<int, int, int, int>(_instance, args.Arg1, args.Arg2, args.Arg3);
+                    action = () => method.Invoke(_instance, string.Empty, string.Empty, string.Empty);
                     break;
                 case 4:
-                    action = () => method.InvokeWithResult<int, int, int, int, int>(_instance, args.Arg1, args.Arg2, args.Arg3, args.Arg4);
+                    action = () => method.Invoke(_instance, string.Empty, string.Empty, string.Empty, string.Empty);
                     break;
                 case 5:
-                    action = () => method.InvokeWithResult<int, int, int, int, int, int>(_instance, args.Arg1, args.Arg2, args.Arg3, args.Arg4, args.Arg5);
+                    action = () => method.Invoke(_instance, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
                     break;
             }
 
             //
-            action.Should().Throw<UnexpectedMethodSignatureException>();
+            action.Should().Throw<UnexpectedMethodParametersException>();
         }
     }
 }

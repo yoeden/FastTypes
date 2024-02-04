@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 
@@ -221,12 +222,11 @@ namespace FastTypes.Compiler
             return CreateTDelegate(method, args);
         }
 
-        private static void EmitLoadArgs(Type[] args, ILGenerator il)
+        private static void EmitLoadArgs(IReadOnlyCollection<Type> args, ILGenerator il)
         {
             //Order matters
-            switch (args.Length)
+            switch (args.Count)
             {
-                //We always have a instance argument, even if in static method
                 case 1:
                     //Always load instance
                     il.Emit(OpCodes.Ldarg_0);
@@ -249,11 +249,10 @@ namespace FastTypes.Compiler
                     il.Emit(OpCodes.Ldarg_3);
                     break;
                 default:
-                    for (int i = 0; i < args.Length; i++)
+                    for (int i = 0; i < args.Count; i++)
                     {
                         il.Emit(OpCodes.Ldarg_S, i);
                     }
-
                     break;
             }
         }

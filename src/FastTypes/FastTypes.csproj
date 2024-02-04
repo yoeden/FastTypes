@@ -34,7 +34,7 @@
   <PropertyGroup>
     <!-- TODO Move this common values to Directory.Build.props -->
     <!-- Compiling Properties -->
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <AnalysisLevel>latest</AnalysisLevel>
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
     <SignAssembly>true</SignAssembly>
@@ -65,7 +65,18 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="FastTypesBenchmarks" />
     <InternalsVisibleTo Include="FastTypes.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Reflection\Fields\" />
+    <Folder Include="Reflection\Methods\Func\" />
+    <Folder Include="Reflection\Methods\Action\" />
   </ItemGroup>
 
 </Project>

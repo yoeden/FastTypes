@@ -25,6 +25,7 @@ namespace FastTypes.Reflection
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected void ThrowIfInstanceIsNull<TType>(TType instance)
         {
+            //TODO: ref TType to avoid cloning value types
             //Use TType to avoid boxing
             if (!IsStatic && instance == null) ThrowHelper.InstanceCantBeNullOfNonStaticMembers(Name);
         }

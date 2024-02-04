@@ -18,13 +18,13 @@ namespace FastTypes.Tests.Reflection.Method
         }
 
         [Theory]
-        [InlineData(0, nameof(MethodsClass.NoReturnNoArguments))]
+        [InlineData(0, nameof(MethodsClass.NoReturnNoArg))]
         [InlineData(1, nameof(MethodsClass.NoReturn1Arg))]
         [InlineData(2, nameof(MethodsClass.NoReturn2Arg))]
         [InlineData(3, nameof(MethodsClass.NoReturn3Arg))]
         [InlineData(4, nameof(MethodsClass.NoReturn4Arg))]
         [InlineData(5, nameof(MethodsClass.NoReturn5Arg))]
-        public void Invoke_OnValidArguments_ShouldInvoke(int argsCount, string name)
+        public void Invoke_OnValidParameters_ShouldInvoke(int argsCount, string name)
         {
             //
             var args = new Args();
@@ -69,7 +69,7 @@ namespace FastTypes.Tests.Reflection.Method
         }
 
         [Theory]
-        [InlineData(0, nameof(MethodsClass.NoReturnNoArguments))]
+        [InlineData(0, nameof(MethodsClass.NoReturnNoArg))]
         [InlineData(1, nameof(MethodsClass.NoReturn1Arg))]
         [InlineData(2, nameof(MethodsClass.NoReturn2Arg))]
         [InlineData(3, nameof(MethodsClass.NoReturn3Arg))]
@@ -110,7 +110,7 @@ namespace FastTypes.Tests.Reflection.Method
         }
 
         [Theory]
-        [InlineData(0, nameof(MethodsClass.ReturnNoArguments))]
+        [InlineData(0, nameof(MethodsClass.ReturnNoArg))]
         [InlineData(1, nameof(MethodsClass.Return1Arg))]
         [InlineData(2, nameof(MethodsClass.Return2Arg))]
         [InlineData(3, nameof(MethodsClass.Return3Arg))]
@@ -168,7 +168,7 @@ namespace FastTypes.Tests.Reflection.Method
         [InlineData(3, nameof(MethodsClass.Return3Arg))]
         [InlineData(4, nameof(MethodsClass.Return4Arg))]
         [InlineData(5, nameof(MethodsClass.Return5Arg))]
-        public void Invoke_OnInvalidSignature_ShouldThrow(int argsCount, string name)
+        public void Invoke_OnInvalidParameters_ShouldThrow(int argsCount, string name)
         {
             //
             var args = new Args();
@@ -179,7 +179,7 @@ namespace FastTypes.Tests.Reflection.Method
             switch (argsCount)
             {
                 case 0:
-                    action = () => method.Invoke(_instance);
+                    action = () => method.Invoke(_instance, string.Empty);
                     break;
                 case 1:
                     action = () => method.Invoke(_instance, string.Empty);
@@ -199,7 +199,7 @@ namespace FastTypes.Tests.Reflection.Method
             }
 
             //
-            action.Should().Throw<UnexpectedMethodSignatureException>();
+            action.Should().Throw<UnexpectedMethodParametersException>();
         }
     }
 }

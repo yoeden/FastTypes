@@ -9,6 +9,53 @@ namespace FastTypes.Compiler
 {
     internal static class FluentILExt
     {
+        public static FluentIL BoxIfNeeded(this FluentIL il, Type t)
+        {
+            if (t.IsValueType) il.Box(t);
+
+            return il;
+        }
+
+        public static FluentIL LoadArguments(this FluentIL il, MethodInfo info)
+        {
+            var n = info.GetParameters().Length;
+            for (int i = 0; i < n; i++)
+            {
+                il.LoadArgument(i);
+            }
+            //switch (n)
+            //{
+            //    case 1:
+            //        //Always load instance
+            //        il.Emit(OpCodes.Ldarg_0);
+            //        break;
+            //    case 2:
+            //        //Always load instance
+            //        il.Emit(OpCodes.Ldarg_0);
+            //        il.Emit(OpCodes.Ldarg_1);
+            //        break;
+            //    case 3:
+            //        //Always load instance
+            //        il.Emit(OpCodes.Ldarg_0);
+            //        il.Emit(OpCodes.Ldarg_1);
+            //        il.Emit(OpCodes.Ldarg_2);
+            //        break;
+            //    case 4:
+            //        il.Emit(OpCodes.Ldarg_0);
+            //        il.Emit(OpCodes.Ldarg_1);
+            //        il.Emit(OpCodes.Ldarg_2);
+            //        il.Emit(OpCodes.Ldarg_3);
+            //        break;
+            //    default:
+            //        for (int i = 0; i < args.Count; i++)
+            //        {
+            //            il.Emit(OpCodes.Ldarg_S, i);
+            //        }
+            //        break;
+            //}
+            return il;
+        }
+
         public static FluentIL CheckNull(
             this FluentIL il,
             Type targetType,

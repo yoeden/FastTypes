@@ -15,9 +15,9 @@ namespace FastTypes
 
         public static void InstanceCantBeNullOfNonStaticMembers(string name) => throw new InstanceNullException(name);
 
-        public static void UnexpectedMethodSignature(Type method, Type given) => throw new UnexpectedMethodSignatureException(method, given);
+        public static void UnexpectedMethodParameters(Type expected, Type given) => throw new UnexpectedMethodParametersException(expected, given);
 
-        public static void MethodExpectedVoid(string name, Type returnType) => throw new MethodIsVoidButExpectedReturnException(name, returnType);
+        public static void UnexpectedReturnType(string name, Type returnType, Type expectedType) => throw new UnexpectedMethodReturnTypeException(name, returnType, expectedType);
 
         public static void NoSuitableConstructorFound(Type expected) => throw new NoSuitableConstructorFound(expected);
 
@@ -26,5 +26,7 @@ namespace FastTypes
         public static void NoDefaultConstructorFound(Type t) => throw new NoDefaultConstructorFoundException(t);
 
         public static void ProducerConsumerConstructor(Type t) => throw new ProducerConsumerConstructorException(t);
+
+        public static void MethodDoesntExists(Type owner, string name) => throw new MethodDoesntExistsException(owner, name);
     }
 }
